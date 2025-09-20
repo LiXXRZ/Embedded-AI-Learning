@@ -1,0 +1,4 @@
+--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware
+-ID:\keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+-D__UVISION_VERSION="543" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER
+-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d "User\main.c"
