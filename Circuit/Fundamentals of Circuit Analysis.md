@@ -275,3 +275,59 @@ Given `v₂ = 3 V`:
 
 **Answer:** The current `i` is **-2.5 A** and the power absorbed by the resistor is **12.5 W**.
 **答案：** 电流 `i` 为 **-2.5 A**，电阻吸收的功率为 **12.5 W**。
+
+---
+
+#### **V. Basic Laws & Circuit Topology (基本定律与电路拓扑)**
+
+1.  **Circuit Topology Definitions (电路拓扑定义)**
+    *   **Node (节点):** A point where two or more circuit elements have a common connection.
+    *   **Branch (支路):** A single path in a network, composed of one element and the nodes at each end.
+    *   **Loop (回路):** Any closed path in a circuit.
+    *   **Path (路径):** A sequence of connected branches where no node is encountered more than once.
+
+2.  **Kirchhoff's Current Law (KCL) (基尔霍夫电流定律)**
+    *   **Statement:** The algebraic sum of currents entering a node (or any closed boundary) is zero.
+        **定律陈述：** 进入一个节点（或任何闭合边界）的电流的代数和为零。
+    *   This is a statement of the conservation of charge.
+        这是电荷守恒的体现。
+    *   **Formula:** `Σ i_entering = 0` or `Σ i_entering = Σ i_leaving`
+        **公式：** `Σ i_进入 = 0` 或 `Σ i_进入 = Σ i_离开`
+    *   For a circuit with `n` nodes, there are `n-1` independent KCL equations.
+        对于一个有 `n` 个节点的电路，有 `n-1` 个独立的KCL方程。
+
+3.  **Kirchhoff's Voltage Law (KVL) (基尔霍夫电压定律)**
+    *   **Statement:** The algebraic sum of all voltages around any closed path (loop) in a circuit is zero.
+        **定律陈述：** 电路中沿任何闭合路径（回路）的所有电压的代数和为零。
+    *   This is a statement of the conservation of energy.
+        这是能量守恒的体现。
+    *   **Formula:** `Σ v_rises = Σ v_drops` or `Σ v = 0` (around a loop)
+        **公式：** `Σ v_升 = Σ v_降` 或 `Σ v = 0` (沿回路)
+    *   For a circuit with `b` branches and `n` nodes, there are `b - n + 1` independent KVL equations.
+        对于一个有 `b` 条支路和 `n` 个节点的电路，有 `b - n + 1` 个独立的KVL方程。
+
+---
+
+#### **VI. Analysis of Basic Circuits (基本电路分析)**
+
+1.  **Series and Parallel Combinations (串联与并联)**
+
+| Feature (特性) | Series Connection (串联) | Parallel Connection (并联) |
+| :--- | :--- | :--- |
+| **Current (电流)** | The **same** current flows through all elements. (`i₁ = i₂ = ...`) | Total current **divides** among the elements. (`i_total = i₁ + i₂ + ...`) |
+| **Voltage (电压)** | Total voltage is the **sum** of individual voltages. (`v_total = v₁ + v₂ + ...`) | The **same** voltage is across all elements. (`v₁ = v₂ = ...`) |
+| **Equivalent Resistance (等效电阻)** | `R_eq = R₁ + R₂ + ... + R_N` | `1/R_eq = 1/R₁ + 1/R₂ + ... + 1/R_N` |
+| **Equivalent Conductance (等效电导)** | `1/G_eq = 1/G₁ + 1/G₂ + ... + 1/G_N` | `G_eq = G₁ + G₂ + ... + G_N` |
+
+2.  **Voltage Division (分压)**
+    *   For resistors in **series**, the voltage is divided among them. The voltage across any resistor `R_k` is:
+        对于 **串联** 的电阻，电压在它们之间分配。任意电阻 `R_k` 上的电压为：
+        `v_k = v_total * (R_k / (R₁ + R₂ + ... + R_N))`
+
+3.  **Current Division (分流)**
+    *   For resistors in **parallel**, the total current is divided among them. The current through any resistor `R_k` is:
+        对于 **并联** 的电阻，总电流在它们之间分配。流过任意电阻 `R_k` 的电流为：
+        `i_k = i_total * (R_eq / R_k) = i_total * (G_k / (G₁ + G₂ + ... + G_N))`
+    *   For the special case of **two parallel resistors**, the current through `R₂` is:
+        对于 **两个电阻并联** 的特殊情况，流过 `R₂` 的电流为：
+        `i₂ = i_total * (R₁ / (R₁ + R₂))`
