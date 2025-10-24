@@ -8,7 +8,6 @@ The core objective of this experiment is to master the basic operation of circui
 
 Through hands-on operation, the experiment verifies the consistency between theoretical resistance values (calculated by color code) and actual measured values, and confirms the validity of Kirchhoff’s Current Law (KCL) and Kirchhoff’s Voltage Law (KVL) in practical circuits.
 
-
 ## II. Experiment Section
 ### 1. Experimental Instruments and Materials
 - Resistors: 5 resistors (R1: 2k2, R2: 47k, R3: 220k, R4: 100R, R5: 1M);  
@@ -31,8 +30,10 @@ Following the steps:
 | R2        | 47k                       | 47,000        | 黄紫黑橙金          | 46.8k          | ±5%         |
 | R3        | 220k                      | 220,000       | 红红黑黄棕          | 0.218M         | ±1%         |
 | R4        | 100R                      | 100           | 棕黑黑黑红          | 99.3R          | ±2%         |
-| R5        | 1M                        | 1,000,000     | 棕黑黑蓝棕          | 0.990M         | ±1%         |
-| R total   | 2.182k                    | 2201          | -                    | 2.182k         | -           |
+| R5        | 1M                        | 1,000,000     | 棕黑黑黄棕          | 0.990M         | ±1%         |
+| R total   | -                   | 2201          | -                    | 2.182k         | -           |
+
+[![048a40207500c7cd57aa1395129318db.jpg](https://youke1.picui.cn/s1/2025/10/23/68fa2d01f2530.jpg)](https://youke1.picui.cn/s1/2025/10/23/68fa2d01f2530.jpg)
 
 *Figure 1: Physical Connection Diagram of Resistors on Breadboard*  
 *(Note: The diagram shows two parallel branches in series, consistent with the connection mode: Branch 1 (R1 and R2 inserted in parallel breadboard holes) and Branch 2 (R3, R4, R5 inserted in parallel breadboard holes), with the two branches connected end-to-end via wires to form a series circuit.)*
@@ -94,9 +95,9 @@ Steps and data:
 
 - **R5 (Color Code: 棕黑黑蓝棕)**:  
   - 1st band (棕): 1; 2nd band (黑): 0; 3rd band (黑): 0;  
-  - 4th band (蓝): Decimal multiplier = 10⁶ (1000000);  
+  - 4th band (蓝): Decimal multiplier = 10⁴ (10000);  
   - 5th band (棕): Tolerance = ±1%;  
-  - Nominal value: (100) × 10⁶ = 1000000Ω (1M);  
+  - Nominal value: (100) × 10⁴ = 1000000Ω (1M);  
   - Allowable range: 1000000Ω × (1±1%) = 990000Ω ~ 1010000Ω;  
   - Measured value (990000Ω) is within the allowable range → Qualified.  
 
