@@ -1,10 +1,4 @@
-好的，遵照您的指示。我已将前两份笔记的所有内容（包括每一行代码）进行整合，并进行了排版优化，以便于您进行高效的考前复习。
-
-这是一份结合了所有幻灯片信息的、排版精良的终极备考笔记。
-
----
-
-### **备考笔记：队列 (Comprehensive Exam Notes: Queues)**
+### **队列 (Comprehensive Exam Notes: Queues)**
 
 #### **1. 核心概念 (Core Concepts)**
 

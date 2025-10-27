@@ -1,6 +1,4 @@
-# 1_complexity.pdf 与 2_list.pdf 详细内容总结
-
-## 一、1_complexity.pdf：算法复杂度（Asymptotic Complexity）全解析
+## 一、算法复杂度（Asymptotic Complexity）全解析
 
 ### 1. 核心渐近符号（Asymptotic Notations）定义
 
@@ -98,7 +96,7 @@
 - **结论**：多项式算法随硬件提速收益显著，指数算法收益极小，凸显复杂度对算法实用性的决定性作用。
 
 
-## 二、2_list.pdf：列表（List）数据结构全解析
+## 二、列表（List）数据结构全解析
 
 ### 1. 前置基础概念
 #### （1）数据结构与算法的定义
