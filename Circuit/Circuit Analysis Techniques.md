@@ -1,5 +1,4 @@
 ### **Chapter 2: Circuit Analysis Techniques**
-### **第二章: 电路分析技术**
 
 ---
 

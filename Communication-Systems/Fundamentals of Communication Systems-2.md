@@ -106,10 +106,29 @@
 *   **模拟与数字带宽**:
     *   **模拟带宽 (Analogue Bandwidth)**: 介质能通过的频率范围，单位为赫兹 (Hz)。
     *   **数字带宽 (Digital Bandwidth)**: 介质能通过的最大比特率，单位为比特/秒 (bps)。
+*   **带宽利用**:
+    *   电磁频谱是一种宝贵的自然资源，通信工程致力于最大限度地利用有限的频谱。
+    *   开发通信技术以最小化传输给定信息所需的带宽，从而节约频谱空间。
 
 ---
 
-#### **10. 数据速率限制 (Data Rate Limits)**
+#### **10. 信噪比 (Signal-to-Noise Ratio - SNR)**
+*   **定义**: 信噪比（SNR）是用于量化信号中噪声水平的参数。
+    *   Signal-to-noise ratio (SNR) is a parameter used to quantify how much noise there is in a signal.
+*   **意义**: 高信噪比意味着信号功率相对于噪声水平较高，从而得到高质量的信号。
+    *   A high SNR means a high signal power relative to noise level, resulting in a good-quality signal.
+*   **计算**:
+    *   信噪比被定义为平均信号功率与平均噪声功率的比值。之所以考虑平均功率，是因为它们可能随时间变化。
+    *   The signal-to-noise ratio is defined as the ratio of average signal power to average noise power. We consider the average power because they may change with time.
+    *   **公式**: `SNR = 平均信号功率 / 平均噪声功率`
+*   **分贝单位 (Decibels)**:
+    *   由于SNR是两个功率的比值，通常用分贝（dB）单位来表示。
+    *   Because SNR is the ratio of two powers, it is often described in decibel units, SNRdB.
+    *   **公式**: `SNR_dB = 10 × log₁₀(SNR)`
+
+---
+
+#### **11. 数据速率限制 (Data Rate Limits)**
 
 数据速率取决于三个因素：
 1.  **可用带宽 (The bandwidth available)**
@@ -134,8 +153,8 @@
     *   `信道容量 (Capacity, C) = B × log₂(1 + SNR)`
     *   `C` 是信道的理论最高数据速率 (bps)
     *   `B` 是信道带宽 (Hz)
-    *   `SNR` 是信噪比 (Signal-to-Noise Ratio)，为平均信号功率与平均噪声功率之比。
-    *   `SNR_dB = 10 × log₁₀(SNR)`
+    *   `SNR` 是信噪比 (Signal-to-Noise Ratio)。
+    *   香农公式定义了信道的特性，与传输方法无关。无论我们使用多少信号电平，数据速率都不能超过信道容量。
     *   **示例问题 1**:
         > 电话线的带宽通常为 3000 Hz，信噪比通常为 3162。计算该信道的容量。
         > **解**:
@@ -149,7 +168,7 @@
 
 ---
 
-#### **11. 性能指标 (Performance Metrics)**
+#### **12. 性能指标 (Performance Metrics)**
 
 *   **吞吐量 (Throughput)**: 衡量我们能以多快的速度实际发送数据。
     *   带宽是链路的 **潜在** 速率，吞吐量是 **实际** 速率。
@@ -176,7 +195,7 @@
 
 ---
 
-#### **12. 电磁频谱与无线传输 (Electromagnetic Spectrum & Wireless Transmission)**
+#### **13. 电磁频谱与无线传输 (Electromagnetic Spectrum & Wireless Transmission)**
 
 *   **无线电信号 (Radio Signals)**: 通过电磁波发送信息。频率单位为赫兹 (Hertz)，以先驱海因里希·赫兹命名。
 *   **无线传输分类**:
@@ -186,7 +205,7 @@
 
 ---
 
-#### **13. 多路复用 (Multiplexing)**
+#### **14. 多路复用 (Multiplexing)**
 
 *   **定义**: 通过单个通信信道同时传输两个或多个独立信号的过程。它增加了可以传输的信息量。
 *   **原因**: 提高传输设施的利用率，降低成本。
