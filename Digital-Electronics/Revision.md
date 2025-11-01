@@ -1,4 +1,4 @@
-### **幻灯片 3: 不同数字系统之间的转换 (Conversion between different number systems)**
+### **不同数字系统之间的转换 (Conversion between different number systems)**
 
 ---
 
