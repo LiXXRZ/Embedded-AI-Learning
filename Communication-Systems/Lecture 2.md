@@ -1,4 +1,4 @@
-### **SCC.160: 通信系统基础 - 第二讲 (Fundamentals of Communication Systems - Lecture 2)**
+### **Fundamentals of Communication Systems - Lecture 2**
 
 #### **1. 信号是什么？- 回顾 (What is a signal? - Recap)**
 *   **信号 (Signal)**: 一个或多个自变量的函数，其中包含某种信息。

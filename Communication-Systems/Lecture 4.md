@@ -1,5 +1,4 @@
-### **Fundamentals of Communication Systems - Lecture 4**
-### **通信系统基础 - 第 4 讲**
+### **Fundamentals of Communication Systems**
 
 ---
 
