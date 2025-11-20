@@ -1,4 +1,4 @@
-### **Chapter 2: Circuit Analysis Techniques**
+### **Circuit Analysis Techniques**
 
 ---
 
