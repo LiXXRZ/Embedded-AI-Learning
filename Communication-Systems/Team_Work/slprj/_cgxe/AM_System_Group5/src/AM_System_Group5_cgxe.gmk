@@ -1,0 +1,74 @@
+#--------------------------- Tool Specifications -------------------------
+#
+# Modify the following macros to reflect the tools you wish to use for
+# compiling and linking your code.
+#
+CC = "D:\Matlab 2024b\bin\win64\mex.exe" -R2018a
+LD = $(CC)
+ 
+MODEL     = AM_System_Group5
+TARGET      = cgxe
+MODULE_SRCS   = m_NxVrgrXijX0m0mdpZZqrmB.c
+MODEL_SRC  = AM_System_Group5_cgxe.c
+MODEL_REG = AM_System_Group5_cgxe_registry.c
+MAKEFILE    = AM_System_Group5_cgxe.gmk
+MATLAB_ROOT  = d:\matlab 2024b\toolbox\stateflow\stateflow\..\..\..
+BUILDARGS   = 
+#------------------------------ Include/Lib Path ------------------------------
+ 
+USER_INCLUDES = -I"E:\Embedded-AI-Learning\Communication-Systems\Team_Work" -I"E:\Embedded-AI-Learning\Communication-Systems\Team_Work\slprj\_cprj" 
+AUX_INCLUDES = 
+MLSLSF_INCLUDES  = \
+    -I"D:\Matlab 2024b\extern\include" \
+    -I"D:\Matlab 2024b\simulink\include" \
+    -I"D:\Matlab 2024b\rtw\c\src" 
+
+THIRD_PARTY_INCLUDES = -I"E:\Embedded-AI-Learning\Communication-Systems\Team_Work\slprj\_cgxe\AM_System_Group5\src" 
+
+INCLUDE_PATH = $(USER_INCLUDES) $(AUX_INCLUDES) $(MLSLSF_INCLUDES) $(COMPILER_INCLUDES) $(THIRD_PARTY_INCLUDES)
+ 
+#----------------- Compiler and Linker Options --------------------------------
+ 
+# Optimization Options
+ 
+CC_OPTS =  -w   
+CPP_REQ_DEFINES = -DMATLAB_MEX_FILE
+ 
+# Uncomment this line to move warning level to W4
+# cflags = $(cflags:W3=W4)
+CFLAGS = $(CPP_REQ_DEFINES) $(INCLUDE_PATH) CFLAGS="$$CFLAGS $(CC_OPTS)"
+ 
+LDFLAGS =  
+ 
+AUXLDFLAGS = 
+#----------------------------- Source Files -----------------------------------
+ 
+THIRD_PARTY_SRCS =   
+REQ_SRCS  = $(MODEL_SRC) $(MODEL_REG) $(MODULE_SRCS) $(THIRD_PARTY_SRCS) 
+
+USER_OBJS =
+
+AUX_ABS_OBJS =
+
+REQ_OBJS = $(REQ_SRCS:.cpp=.obj)
+REQ_OBJS2 = $(REQ_OBJS:.c=.obj)
+OBJS = $(REQ_OBJS2) $(USER_OBJS) $(AUX_ABS_OBJS) $(THIRD_PARTY_OBJS)
+OBJLIST_FILE = AM_System_Group5_cgxe.mol
+SFCLIB = 
+AUX_LNK_OBJS = 
+USER_LIBS = 
+PARLIB = 
+ 
+#--------------------------------- Rules --------------------------------------
+ 
+MEX_FILE_NAME = $(MODEL)_$(TARGET).mexw64
+ 
+ $(MEX_FILE_NAME): $(MAKEFILE) $(OBJS) $(SFCLIB) $(AUX_LNK_OBJS)
+	@echo ### Linking ...
+	$(LD) -silent LD="$$MINGWROOT\bin\g++" LDFLAGS="$$LDFLAGS $(LDFLAGS) $(AUXLDFLAGS)" -output $(MEX_FILE_NAME) @$(OBJLIST_FILE) $(USER_LIBS) $(SFCLIB) $(PARLIB) $(IPPLIB) $(THIRD_PARTY_LIBS) 
+%.obj :    %.c
+	$(CC) -c $(CFLAGS) $<
+
+%.obj :    %.cpp
+	$(CC) -c $(CFLAGS) $<
+
