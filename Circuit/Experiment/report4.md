@@ -49,7 +49,7 @@ The circuit consists of a DC bridge where $R_9$ acts as a variable resistor simu
 *   **Amplifier:** $R_{in}=47k\Omega$, $R_{feedback}=220k\Omega$.
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325cff1134d.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cba30849.png" width="50%" alt="Figure 1">
 
 <b>Figure 1: Material Information</b>
 </center>
@@ -59,7 +59,7 @@ The circuit consists of a DC bridge where $R_9$ acts as a variable resistor simu
 We performed the simulation twice: first using the **LM324** (General Purpose) and second using the **OP37** (Precision). The value of $\Delta R$ was varied via the potentiometer key settings.
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325cff36dae.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cb994c61.png" width="50%" alt="Figure 2">
 
 <b>Figure 2: LM324</b>
 </center>
@@ -76,7 +76,7 @@ We performed the simulation twice: first using the **LM324** (General Purpose) a
 | 7 | 22.545 | 106.481 | -7 | 4.7230 | 4.6809 | 0.899 |
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325cff56239.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cba649e9.png" width="50%" alt="Figure 3">
 
 <b>Figure 3: OP37</b>
 </center>
@@ -92,7 +92,7 @@ We performed the simulation twice: first using the **LM324** (General Purpose) a
 | 7 | 22.546 | 105.532 | -7 | 4.6807 | 4.6809 | 0.004 |
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325cfec1f2d.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cb834629.png" width="50%" alt="Figure 4">
 
 <b>Figure 4: Oscilloscope output showing the DC voltage levels</b>
 </center>
@@ -114,7 +114,7 @@ Two circuits were built to verify the Reciprocity Theorem.
 2.  **Circuit B:** The 12V source is moved to the right loop; current is measured in the left loop.
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325cfee0e39.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cba55369.png" width="50%" alt="Figure 5">
 
 <b>Figure 5: Verification of Reciprocity Theorem showing current probes</b>
 </center>
@@ -136,7 +136,7 @@ A circuit containing a Current-Controlled Current Source (CCCS) was analyzed. To
 *   **Increment:** 0.2A
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325d06e8523.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cc3a85b6.png" width="50%" alt="Figure 6">
 
 <b>Figure 6: Circuit schematic for DC Sweep analysis</b>
 </center>
@@ -145,7 +145,7 @@ A circuit containing a Current-Controlled Current Source (CCCS) was analyzed. To
 The resulting $I-V$ characteristic curve is linear, confirming the circuit behaves as a linear network.
 
 <center>
-<img src="https://youke1.picui.cn/s1/2025/12/05/69325d0724449.png" width="40%" alt="Figure 1">
+<img src="https://youke2.picui.cn/s1/2025/12/10/69394cc3bd1e2.png" width="50%" alt="Figure 7">
 
 <b>Figure 7: DC Sweep results (Voltage vs. Current)</b>
 </center>
