@@ -4,8 +4,6 @@
 **Laboratory Exercise No:** 1
 **Experiment Title:** Sinusoidal Steady-State AC Circuit Characteristics
 **Date:** 26/3/28
-**Name:** 李鹏麒
-**Student ID:** 24721015
 
 ---
 
