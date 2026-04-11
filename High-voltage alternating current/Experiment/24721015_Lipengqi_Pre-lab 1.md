@@ -1,4 +1,4 @@
-# **Lab Report**
+# **Pre-lab Report**
 
 **Course Name:** [High-Voltage Alternating Current]
 **Laboratory Exercise No:** 1
