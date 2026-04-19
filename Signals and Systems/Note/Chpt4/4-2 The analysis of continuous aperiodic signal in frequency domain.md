@@ -33,7 +33,7 @@
 | **虚指数** $e^{j\omega_0 t}$ | $2\pi \delta(\omega - \omega_0)$ | 本身就是一个单一频率的信号，所以频谱在 $\omega_0$ 处有一个冲激。 |
 | **余弦波** $\cos(\omega_0 t)$ | $\pi[\delta(\omega - \omega_0) + \delta(\omega + \omega_0)]$| 由欧拉公式 $\frac{e^{j\omega_0 t} + e^{-j\omega_0 t}}{2}$ 结合虚指数性质得到。 |
 | **正弦波** $\sin(\omega_0 t)$ | $\frac{\pi}{j}[\delta(\omega - \omega_0) - \delta(\omega + \omega_0)]$| 注意：课件写成了 $j\pi[\delta(\omega+\omega_0) - \delta(\omega-\omega_0)]$，本质一样（提出分母的 $j$ 变符号）。 |
-| **三角脉冲** $\Lambda_\tau(t)$ | $\frac{\tau}{2} Sa^2\left(\frac{\omega\tau}{4}\right)$ | 中心在 0、底宽 $\tau$、幅度 A。三角脉冲 = 矩形脉冲 * 矩形脉冲（时域卷积）。|
+| **三角脉冲** $\Lambda_\tau(t)$ | $\frac{A\tau}{2} Sa^2\left(\frac{\omega\tau}{4}\right)$ | 中心在 0、底宽 $\tau$、幅度 A。三角脉冲 = 矩形脉冲 * 矩形脉冲（时域卷积）。|
 
 ---
 
