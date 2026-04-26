@@ -65,9 +65,9 @@ $$ \tilde{y}[k] = \frac{1}{N} \sum_{m=0}^{N-1} \tilde{X}[m] \cdot \mathbf{H\left
 
 | 滤波器类型 | 频域特性 $H(e^{j\Omega})$ (仅看 $[-\pi, \pi]$) | 时域冲激响应 $h[k]$ |
 | :--- | :--- | :--- |
-| **低通 (LPF)** | $|\Omega| < \Omega_c$ 时为 $1$，其余为 $0$ | **$\frac{\Omega_c}{\pi} Sa(\Omega_c k)$** |
-| **高通 (HPF)** | $\Omega_c < |\Omega| \le \pi$ 时为 $1$，其余为 $0$ | $\delta[k] - \frac{\Omega_c}{\pi} Sa(\Omega_c k)$ |
-| **带通 (BPF)** | $\Omega_1 < |\Omega| < \Omega_2$ 时为 $1$ | $\frac{\Omega_2}{\pi} Sa(\Omega_2 k) - \frac{\Omega_1}{\pi} Sa(\Omega_1 k)$ |
+| **低通 (LPF)** | $\vert\Omega\vert < \Omega_c$ 时为 $1$，其余为 $0$ | **$\frac{\Omega_c}{\pi} Sa(\Omega_c k)$** |
+| **高通 (HPF)** | $\Omega_c < \vert\Omega\vert \le \pi$ 时为 $1$，其余为 $0$ | $\delta[k] - \frac{\Omega_c}{\pi} Sa(\Omega_c k)$ |
+| **带通 (BPF)** | $\Omega_1 < \vert\Omega\vert < \Omega_2$ 时为 $1$ | $\frac{\Omega_2}{\pi} Sa(\Omega_2 k) - \frac{\Omega_1}{\pi} Sa(\Omega_1 k)$ |
 | **带阻 (BSF)** | 通带在中间被挖空 | $\delta[k] + \frac{\Omega_1}{\pi} Sa(\Omega_1 k) - \frac{\Omega_2}{\pi} Sa(\Omega_2 k)$ |
 
 **⚠️ 必考考点：物理不可实现性！**
