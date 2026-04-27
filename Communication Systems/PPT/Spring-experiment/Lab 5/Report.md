@@ -1,9 +1,32 @@
-**Title:** CNSCC.160 Lab 5 Speech Endpoint Detection (Voice Activity Detection)
-**Name:** [在此处填写你的姓名]
-**Student ID:** [在此处填写你的学号]
-**Date:** May 2026
-
 ---
+papersize: A4
+margin: 2.5cm
+fontsize: 14pt
+colorlinks: true
+---
+
+<br><br><br><br><br>
+
+<div align="center">
+    <div style="font-size: 26px; font-weight: bold; line-height: 1.6;">
+        CNSCC.160 Lab 5
+    </div>
+    <div style="font-size: 32px; font-weight: 600; margin-top: 15px; line-height: 1.5;">
+        Speech Endpoint Detection
+    </div>
+    <div style="font-size: 22px; color: #555; margin-top: 10px;">
+        (Voice Activity Detection, VAD)
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+
+<div align="center" style="font-size: 20px; line-height: 2;">
+Name: Li Pengqi<br>
+Student ID: 24721015
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Objective
 The primary objective of this laboratory is to design and implement a robust Voice Activity Detection (VAD) system. The system's goal is to effectively separate genuine human speech utterances from silence and complex background noise. Accurate endpoint detection is a critical preprocessing step in speech recognition and telecommunications, as it reduces computational load and prevents noise from being processed as speech. 
@@ -49,13 +72,29 @@ The VAD algorithm was implemented in MATLAB through the following systematic pip
 
 ### 4.1 Clean Audio Analysis: "Harvard_sentences.wav"
 
-**[!!! 插入 Figure 1: STE Analysis - Harvard !!!]**
-*(标注：找一处波峰最大处，画红圈并标注 "Instance of Voiced Sound (High STE)")*
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef470c70f5e.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 1: STE Analysis - Harvard</em>
+</center>
 
-**[!!! 插入 Figure 2: ZCR Analysis - Harvard !!!]**
-*(标注：找一处波形平坦但ZCR极高的句首/尾处，画蓝圈并标注 "Instance of Unvoiced Sound (High ZCR)")*
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef470cb2b53.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 2: ZCR Analysis - Harvard</em>
+</center>
 
-**[!!! 插入 Figure 3: Combined Detection - Harvard !!!]**
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef470c8e5a3.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 3: Combined Detection - Harvard</em>
+</center>
 
 **Detailed Observations:**
 In a studio-quality recording like "Harvard_sentences.wav," the noise floor is virtually non-existent. 
@@ -65,11 +104,29 @@ In a studio-quality recording like "Harvard_sentences.wav," the noise floor is v
 
 ### 4.2 Noisy Audio Analysis: "moon.wav"
 
-**[!!! 插入 Figure 4: STE Analysis - moon !!!]**
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef47e28c5da.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 4: STE Analysis - moon</em>
+</center>
 
-**[!!! 插入 Figure 5: ZCR Analysis - moon !!!]**
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef485ea8b5b.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 5: ZCR Analysis - moon</em>
+</center>
 
-**[!!! 插入 Figure 6: Combined Detection - moon !!!]**
+<center>
+    <img src = "https://free.picui.cn/free/2026/04/27/69ef474d3bbc0.png"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 6: Combined Detection - moon</em>
+</center>
 
 **Detailed Observations:**
 The "moon.wav" recording introduced severe complications due to continuous, broadband communication static. 
