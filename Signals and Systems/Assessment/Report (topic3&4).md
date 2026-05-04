@@ -3,20 +3,23 @@
 ## 【Topic 3: System Response Time Domain Solution】
 
 **Objectives**
-(1) Understand the physical meaning of zero-input response and zero-state response in LTI (Linear Time-Invariant) systems. (理解线性时不变系统中零输入响应和零状态响应的物理意义。)
-(2) Master the basic operations of adding noise to audio signals and implementing digital filtering using MATLAB. (掌握使用MATLAB对音频信号加噪及进行数字滤波的基本操作。)
-(3) Evaluate the denoising effect of the M-point moving average system under different window sizes (M values). (评估M点移动平均系统在不同窗口大小M下的去噪效果。)
+
+(1) Understand the physical meaning of zero-input response and zero-state response in LTI (Linear Time-Invariant) systems.
+(2) Master the basic operations of adding noise to audio signals and implementing digital filtering using MATLAB.
+(3) Evaluate the denoising effect of the M-point moving average system under different window sizes (M values).
 
 **Simulation Tasks**
-Task 3: System Response Time Domain Solution
+
 1) Find the zero-input response and zero-state response of an RLC circuit.
 2) Mix the noise into the original audio signal, then use the M-point moving average system to denoise the noise-interfered signal, change the number of M points, and compare the denoising effect under different points.
 
 **Analysis of the Simulation Task**
+
 1) **RLC Circuit Analysis**: For a typical series RLC circuit, the system can be modeled as a second-order continuous system. The zero-state response evaluates the system's reaction to an external step input with zero initial energy. The zero-input response evaluates the system's natural discharge process with initial energy (e.g., initial capacitor voltage) but no external input. We use `tf` and `ss` functions in MATLAB to simulate this.
 2) **Audio Denoising Analysis**: Gaussian white noise is added to simulate real-world interference. The M-point moving average filter acts as a low-pass filter in the time domain. Its impulse response is a rectangular window of length M with amplitude 1/M. A larger M value provides stronger noise suppression (smoother signal) but may cause the original high-frequency audio components to blur or lose sharpness.
 
 **Simulation Code**
+
 ```matlab
 % ==========================================
 % Task 3.1: RLC Circuit System Response (底层微分方程求解版)
@@ -88,31 +91,61 @@ subplot(3,1,3); plot(t_audio, y_denoise_20); title('Denoised M=20 (M=20 去噪)'
 ```
 
 **Simulation Results**
+
 *(在这里贴上你在MATLAB里跑出来的两张图片：一张是RLC电路的两张子图，另一张是音频波形的三张子图)*
 
 **Analysis of the Results**
+
 1) **RLC Circuit**: The zero-state response curve shows the system charging from 0 to a steady state (amplitude 1) under a step input. The zero-input response curve demonstrates an exponential decay oscillation from the initial state (amplitude 1) back to zero, matching the theoretical physical discharging process of capacitors and inductors.
 2) **Audio Denoising**: The original signal is heavily corrupted by high-frequency spikes (noise). With M=5, the moving average filter removes partial noise while maintaining the core envelope of the audio. With M=20, the waveform becomes significantly smoother, proving better noise suppression, but the amplitude peaks are slightly reduced, indicating a loss of high-frequency detail.
 
 ## 【Topic 4: Approximate calculation of continuous convolution】
 
 **Objectives**
-(1) Compute the continuous signal convolution analytically and establish a mathematical baseline. (通过解析法计算连续信号卷积，建立数学基准。)
-(2) Understand the discretization process of continuous signals and implement numerical approximation using MATLAB. (理解连续信号的离散化过程，并使用MATLAB实现数值近似计算。)
-(3) Compare the accuracy of the basic discrete sum method and the rectangular pulse approximation method (Method e) under different sampling intervals $\Delta$. (比较不同采样间隔下，基础离散求和法与矩形脉冲近似法的计算精度。)
+
+(1) Compute the continuous signal convolution analytically and establish a mathematical baseline.
+(2) Understand the discretization process of continuous signals and implement numerical approximation using MATLAB.
+(3) Compare the accuracy of the basic discrete sum method and the rectangular pulse approximation method (Method e) under different sampling intervals $\Delta$.
 
 **Simulation Tasks**
-Task 4: Approximate calculation of continuous signal convolution
+
 Approximate $y(t) = x(t) * h(t)$, compare different sampling intervals $\Delta$, theoretically prove the approximation formula, address issues with infinite-duration signals, and compare calculation errors between basic sampling and rectangular pulse approximations.
 
 **Analysis of the Simulation Task**
+
 *Due to the absence of the Control System Toolbox, the core built-in function ode45 was utilized to solve the second-order differential equation of the RLC circuit directly from state-space principles, which yielded the exact same theoretical responses.*
-1) **Analytical Solution (a)**: $h(t) = x(t)*x(t)$ produces a triangular wave from $t \in [0,2]$. The subsequent convolution $y(t) = x(t)*h(t)$ yields a piecewise quadratic (parabolic) curve spanning $t \in[0,3]$.
-2) **Mathematical Proof (c)**: According to the Riemann sum definition of integration, $y(n\Delta) = \int x(\tau)h(n\Delta-\tau)d\tau \approx \sum x(k\Delta)h(n\Delta-k\Delta)\Delta$. Extracting $\Delta$ leaves the standard discrete convolution definition, proving $y(k\Delta) \approx \Delta \cdot (x[k]*h[k])$.
-3) **Infinite Signal Issue (d)**: For non-time-limited signals, direct numerical convolution will cause memory overflow (Out of Memory) and infinite computation loops in MATLAB. **Solution**: Apply windowing functions to truncate the signals to a finite length containing most of the energy, or use block convolution methods like Overlap-Add / Overlap-Save.
-4) **Approximation Method (e)**: Replacing points with rectangular pulses $p_\Delta(t)$ changes the equivalent mathematical operation. The convolution of two rectangles yields a triangle, which inherently applies linear interpolation between discrete points. This significantly reduces the "staircase effect" compared to zero-order hold methods.
+
+**1. Mathematical Modeling and Analytical Foundation**
+The core of this task is to evaluate the convolution $y(t) = x(t) * h(t)$, where $x(t)$ is a unit gate function defined as $u(t) - u(t-1)$. 
+*   **Step 1:** We first derive $h(t) = x(t) * x(t)$. In the time domain, the convolution of two identical rectangular pulses of width $T$ results in a triangular pulse of base width $2T$. Thus, $h(t)$ is a triangular signal starting at $t=0$, peaking at $t=1$ with amplitude 1, and ending at $t=2$.
+*   **Step 2:** We then derive $y(t) = x(t) * h(t)$. Convolving a rectangular pulse with a triangular pulse produces a piecewise quadratic function (second-order B-spline). Through analytical integration, the exact solution is obtained:
+    *   $y(t) = 0.5t^2$ for $0 \le t < 1$;
+    *   $y(t) = -t^2 + 3t - 1.5$ for $1 \le t < 2$;
+    *   $y(t) = 0.5(t-3)^2$ for $2 \le t \le 3$.
+This analytical result serves as the "Ground Truth" for evaluating numerical approximations.
+
+**2. Discretization and Riemann Summation**
+To perform numerical calculations in MATLAB, continuous signals must be sampled with a sampling interval $\Delta$. The continuous convolution integral $y(t) = \int x(\tau)h(t-\tau)d\tau$ is approximated by the discrete summation:
+$$y(k\Delta) \approx \sum_{n} x(n\Delta)h(k\Delta - n\Delta)\Delta$$
+
+This formula demonstrates that the continuous area under the curve can be approximated by the sum of narrow rectangular areas of width $\Delta$. In MATLAB, this is efficiently implemented using the `conv` function multiplied by the scaling factor $\Delta$. This establishes the theoretical basis for **Method (b)**.
+
+**3. Handling Non-Time-Limited Signals**
+When signals $x(t)$ and $h(t)$ are not time-limited (infinite duration), two major challenges arise in numerical simulation:
+*   **Memory Overflow**: Storing an infinite number of samples is impossible, leading to "Out of Memory" errors.
+*   **Infinite Computation Time**: The convolution of infinite sequences never terminates.
+*   **Proposed Solutions**: 
+    *   **Windowing/Truncation**: Cutting the signal at a point where the energy becomes negligible.
+    *   **Block Convolution**: Implementing "Overlap-Add" or "Overlap-Save" algorithms to process long signal streams in finite segments.
+
+**4. Advanced Pulse Approximation Method**
+**Method (e)** introduces a more sophisticated approximation: representing the signal as a series of rectangular pulses $p_\Delta(t)$. 
+*   Unlike the basic sampling in Method (b) which treats samples as isolated points (Zero-Order Hold), Method (e) acknowledges the duration of each sample. 
+*   Mathematically, since the convolution of two rectangular pulses $p_\Delta(t) * p_\Delta(t)$ is a triangular pulse, the resulting convolution $y(t)$ is constructed from the superposition of these triangular components. 
+*   This effectively performs **linear interpolation** (First-Order Hold) in the reconstruction process, which provides a much smoother and more accurate fit to the quadratic nature of the analytical solution $y(t)$ compared to the staircase approximation of Method (b).
 
 **Simulation Code**
+
 ```matlab
 % ==========================================
 % Task 4: Approximate calculation of convolution
@@ -176,10 +209,12 @@ legend('Exact Analytical', 'Method (e) Approx'); grid on;
 ```
 
 **Simulation Results**
+
 *(在这里贴上跑出来的MATLAB图。同时，在截图下方或者这里，手动把MATLAB命令行里打印出来的两个 MSE 误差数值写上)*
 *Method (b) MSE: [填上MATLAB算出来的值]*
 *Method (e) MSE: [填上MATLAB算出来的值]*
 
 **Analysis of the Results**
+
 1) **Analytical & Numerical Comparison**: By comparing the exact analytical curve (solid black line) with the numerical approximations, it is evident that Method (b) behaves like a discrete staircase, leading to visible quantization errors, especially at the curve transitions. In contrast, Method (e) implicitly applies linear interpolation (due to the convolution properties of rectangular pulses $p_\Delta(t)$), effectively smoothing the curve into continuous line segments. The computed Mean Squared Error (MSE) directly supports this: the MSE for Method (e) is significantly lower than that of Method (b) under the identical sampling interval ($\Delta = 0.1$). This confirms that modeling the signal via rectangular pulse series provides a vastly superior approximation for continuous signal convolution.
 2) **Coordinate Alignment Logic**：The $t=1.5s$ center alignment of the convolution results in the code is to correct the index offset generated in the discrete convolution calculation. This correction ensures that the comparison process is performed in a unified time coordinate system, thereby eliminating spurious errors caused by "position translation" and truly reflecting the difference in accuracy of the algorithm itself (zero-order hold vs. first-order hold) for approximating continuous integrals.
