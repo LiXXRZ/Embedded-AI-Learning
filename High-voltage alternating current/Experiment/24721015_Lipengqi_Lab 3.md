@@ -1,8 +1,7 @@
 # Comprehensive Laboratory Report: Advanced AC Circuit
 **Laboratory Exercise No: 3 - Measurement for Transfer Function**
 
-**Team Members:**[填入你的名字和学号] & [填入队友的名字和学号]
-**Date:** [填入实验日期]
+**Team Members:**[Li Pengqi 24721015] & [Guo Qingjie 24721007]
 
 ## 1. Introduction
 The main objective of this laboratory exercise is to systematically test and verify the frequency response characteristics of fundamental AC circuits. By utilizing a digital oscilloscope and a function waveform generator, we aim to measure the driving point impedance of series and parallel AC networks across various frequencies. Furthermore, this experiment investigates the transfer functions (voltage gain and phase shift) of 1st-order RC low-pass and high-pass filters. A critical component of this report is the incorporation of empirical component measurements to construct an adjusted theoretical model, followed by a rigorous error analysis comparing ideal theories with practical measurements.
@@ -75,7 +74,20 @@ The components exhibited natural manufacturing tolerances, particularly the capa
 
 ### 5.2 Lab Section 1: Driving Point Impedance Data
 
-> `【此处插入图片：图 1(a) 和 图 1(b) 的仿真电路图，或者自己画的带 Rs 的电路图】`
+<table style="border-collapse: collapse; margin: 0 auto;">
+    <tr>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc530fa6784.jpg" width="80%">
+            <br>
+            <em>Figure 1: Circuit of 1(a)</em>
+        </td>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc530f8563b.jpg" width="80%">
+            <br>
+            <em>Figure 2: Circuit of 1(b)</em>
+        </td>
+    </tr>
+</table>
 
 Current $I$ is calculated as $V_R / 10.24\text{ }\Omega$. Impedance $|Z| = V_{in} / I$.
 
@@ -92,16 +104,17 @@ Current $I$ is calculated as $V_R / 10.24\text{ }\Omega$. Impedance $|Z| = V_{in
 | | $5 \text{ kHz}$ | $2.00 \text{ V}$ | $31.2 \text{ mV}$ | $3.04 \text{ mA}$ | $656.4 \text{ }\Omega$ | $19 \text{ }\mu\text{s}$ | $-34.6^\circ$ |
 | | $10 \text{ kHz}$| $2.00 \text{ V}$ | $34.0 \text{ mV}$ | $3.32 \text{ mA}$ | $602.4 \text{ }\Omega$ | $4.4 \text{ }\mu\text{s}$ | $-15.8^\circ$ |
 
-**Waveform and Lissajous Ellipse Recording (Fig 1(b) at 2kHz)**
-> `【此处插入图片：示波器实拍照片 —— 包含双通道正弦波，展示 82us 的时间差】`
-> `【此处插入图片：示波器实拍照片 —— XY模式下的李萨如(Lissajous)椭圆图形】`
-
+<center>
+    <img src = "https://free.picui.cn/free/2026/05/07/69fc5231177d7.jpg"
+        width = 50%>
+</center>
+<center>
+    <em>Figure 3: Waveform Recording (Fig 1(a) at 500Hz)</em>
+</center>
 
 ### 5.3 Lab Section 2: Transfer Function Data & Bode Plots
 
 During the dynamic frequency sweep, the actual input voltage $V_{in}$ exhibited microscopic fluctuations (from $1.97\text{ V}$ to $2.03\text{ V}$) due to the internal impedance matching characteristics of the signal generator. True readings were recorded to guarantee mathematical rigor.
-
-> `【此处插入图片：图 2(a) 和 图 2(b) 的仿真电路图 / Multisim 截图】`
 
 **Table 2: 1st Order RC Low-pass Characteristics (Fig 2a)**
 *(Gain $= 20 \log_{10}(V_{out}/V_{in})$)*
@@ -119,7 +132,20 @@ During the dynamic frequency sweep, the actual input voltage $V_{in}$ exhibited 
 | **10 kHz** | $1.99 \text{ V}$ | $0.16 \text{ V}$ | $23.6 \text{ }\mu\text{s}$ | $-21.88$ | $-85.0$ |
 | **20 kHz** | $2.01 \text{ V}$ | $0.08 \text{ V}$ | $12.5 \text{ }\mu\text{s}$ | $-27.54$ | $-89.9$ |
 
-> `【此处插入图片：低通滤波器 Bode Plot 图 —— 必须使用半对数坐标系 (Semi-log) 绘制】`
+<table style="border-collapse: collapse; margin: 0 auto;">
+    <tr>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf3a4ec.png" width="80%">
+            <br>
+            <em>Figure 4: Multisim Diagram (dB)</em>
+        </td>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf13433.png" width="80%">
+            <br>
+            <em>Figure 5: Multisim Diagram (deg)</em>
+        </td>
+    </tr>
+</table>
 
 **Table 3: 1st Order RC High-pass Characteristics (Fig 2b)**
 *(Ratio $= V_{out}/V_{in}$)*
@@ -137,8 +163,20 @@ During the dynamic frequency sweep, the actual input voltage $V_{in}$ exhibited 
 | **10 kHz** | $1.99 \text{ V}$ | $2.07 \text{ V}$ | $1.81 \text{ }\mu\text{s}$ | $1.041$ | $6.5$ |
 | **20 kHz** | $2.02 \text{ V}$ | $2.12 \text{ V}$ | $0.60 \text{ }\mu\text{s}$ | $1.051$ | $4.3$ |
 
-> `【此处插入图片：高通滤波器 Bode Plot 图 —— 同样使用半对数坐标系 (Semi-log) 绘制】`
-
+<table style="border-collapse: collapse; margin: 0 auto;">
+    <tr>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf13870.png" width="80%">
+            <br>
+            <em>Figure 6: Multisim Diagram (Voltage Ratio)</em>
+        </td>
+        <td style="text-align: center; padding: 10px;">
+            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf33dec.png" width="80%">
+            <br>
+            <em>Figure 7: Multisim Diagram (deg)</em>
+        </td>
+    </tr>
+</table>
 
 ## 6. Comprehensive Error and Phenomenon Analysis
 1.  **Cutoff Frequency Shift ($664\text{ Hz}$ vs $700\text{ Hz}$)**: 
