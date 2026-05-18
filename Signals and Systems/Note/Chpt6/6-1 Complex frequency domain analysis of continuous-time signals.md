@@ -29,6 +29,15 @@ $$ \mathscr{F}\{x(t)e^{-\sigma t}\} = \int_{-\infty}^{\infty} x(t)e^{-\sigma t}e
 *   **正变换**： $X(s) = \int_{0^-}^{\infty} x(t)e^{-st}dt$ ，记为 $x(t) \stackrel{\mathscr{L}}{\longleftrightarrow} X(s)$
 *   **逆变换**： $x(t) = \frac{1}{2\pi j} \int_{\sigma-j\infty}^{\sigma+j\infty} X(s)e^{st}ds$ ，记为 $x(t) = \mathscr{L}^{-1}[X(s)]$
 
+#### 单边与双边拉普拉斯变换怎么区分
+
+| 类型 | 积分区间 | 最适合处理 |
+| --- | --- | --- |
+| 单边拉普拉斯变换 | \([0^-,+\infty)\) | 因果系统、初始条件、完全响应 |
+| 双边拉普拉斯变换 | \((-\infty,+\infty)\) | 左边信号、右边信号、双边信号及其 ROC 区分 |
+
+前者更像“求解微分方程的工程工具”，后者更像“刻画信号本身的复频谱工具”。
+
 ### 3. 单边拉普拉斯变换的收敛域 (ROC)
 存在条件（充要条件）：积分 $\int_{0^-}^{\infty} |x(t)e^{-\sigma t}|dt = C < \infty$ 必须收敛。
 使得该公式成立的 $\sigma$ 的取值范围称为**收敛域 (Region Of Convergence, ROC)**，通常表示为 $Re(s) > \sigma_0$（在复平面上表现为一条垂直线 $\sigma=\sigma_0$ 右侧的右半平面）。
@@ -136,16 +145,27 @@ $\int_{-\infty}^{t} x(\tau)d\tau \leftrightarrow \frac{X(s)}{s} + \frac{x^{(-1)}
 
 ### 10. 初值定理与终值定理 (IVT & FVT)
 *   **初值定理**：若 $x(t)$ 在 $t=0$ 时不包含冲激及其导数，$\lim_{t\to 0^+} x(t) = \lim_{s\to\infty} sX(s)$
-*   **终值定理**：若 $sX(s)$ 的收敛域包含 $j\omega$ 轴（即极点在左半平面），$\lim_{t\to \infty} x(t) = \lim_{s\to 0} sX(s)$
+*   **终值定理**：若 \(sX(s)\) 的全部极点都位于开左半平面，则 $\lim_{t\to \infty} x(t) = \lim_{s\to 0} sX(s)$
 
 > **【例题】已知 $X(s) = \frac{1}{s+1}, Re(s)>-1$，求初值和终值。**
 > 初值：$x(0^+) = \lim_{s\to\infty} s \cdot \frac{1}{s+1} = 1$。
 > 终值：极点在 -1（左半平面），适用终值定理：$x(+\infty) = \lim_{s\to 0} s \cdot \frac{1}{s+1} = 0$。
 
 > **【例题】已知 $X(s) = \frac{s}{s+1}, Re(s)>-1$，求初值和终值。**
-> 解析：因为分子分母同阶（假分式），$x(t)$ 在 $t=0$ 处包含冲激信号，不能直接用初值定理。
-> 改写为 $X(s) = 1 - \frac{1}{s+1} = 1 - X_1(s)$。对真分式 $X_1(s)$ 运用初值定理：$x(0^+) = \lim_{s\to\infty} s \cdot \frac{1}{s+1} = 1$。
-> 终值：直接用 $\lim_{s\to 0} s \frac{s}{s+1} = 0$。
+> 解析：因为
+> $$
+> X(s)=\frac{s}{s+1}=1-\frac{1}{s+1}
+> $$
+> 所以
+> $$
+> x(t)=\delta(t)-e^{-t}u(t)
+> $$
+> 该信号在 \(t=0\) 含有冲激，普通意义下的有限初值 \(x(0^+)\) 不存在，因此**不能使用初值定理**。  
+> 若只看冲激以外的常规部分，则其右极限为 \(-1\)。  
+> 终值可以使用：
+> $$
+> x(+\infty)=\lim_{s\to0}s\frac{s}{s+1}=0
+> $$
 
 ---
 

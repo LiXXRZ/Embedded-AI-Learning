@@ -20,11 +20,11 @@
 ---
 
 ## 一、 👑 常见变换对
-背熟这些，就相当于背熟了微积分里的导数基本公式。所有的复杂题目都是这八个基本信号的组合。
+背熟这些，就相当于背熟了微积分里的导数基本公式。很多复杂题目都可以由这些基本信号组合而来。
 
 | 时域信号 $x(t)$ | 频域频谱密度 $X(j\omega)$ | 深度解析与记忆法 |
 | :--- | :--- | :--- |
-| **单位冲激** $\delta(t)$ | $1$ | 冲激信号只发生在瞬间，但它包含了**所有频率，且能量均匀分布**（白噪声特性）。 |
+| **单位冲激** $\delta(t)$ | $1$ | 冲激信号在时域极端集中，因此在频域上对所有频率的权重都相同。 |
 | **常数直流** $1$ | $2\pi \delta(\omega)$ | 永远不变的信号，频率只有 0，所以能量全部集中在 $\omega=0$ 的无穷大冲激上。 |
 | **符号函数** $sgn(t)$ | $\frac{2}{j\omega}$ | 奇函数，所以频谱是**纯虚奇函数**。 |
 | **单位阶跃** $u(t)$ | $\pi \delta(\omega) + \frac{1}{j\omega}$ | $u(t) = \frac{1}{2} + \frac{1}{2}sgn(t)$。频谱等于 直流的一半 + 符号函数的一半。**必须记住中间有个 $\pi\delta(\omega)$！** |
@@ -34,6 +34,31 @@
 | **余弦波** $\cos(\omega_0 t)$ | $\pi[\delta(\omega - \omega_0) + \delta(\omega + \omega_0)]$| 由欧拉公式 $\frac{e^{j\omega_0 t} + e^{-j\omega_0 t}}{2}$ 结合虚指数性质得到。 |
 | **正弦波** $\sin(\omega_0 t)$ | $\frac{\pi}{j}[\delta(\omega - \omega_0) - \delta(\omega + \omega_0)]$| 注意：课件写成了 $j\pi[\delta(\omega+\omega_0) - \delta(\omega-\omega_0)]$，本质一样（提出分母的 $j$ 变符号）。 |
 | **三角脉冲** $\Lambda_\tau(t)$ | $\frac{A\tau}{2} Sa^2\left(\frac{\omega\tau}{4}\right)$ | 中心在 0、底宽 $\tau$、幅度 A。三角脉冲 = 矩形脉冲 * 矩形脉冲（时域卷积）。|
+| **一般周期信号** $\tilde{x}(t)=\sum_{n=-\infty}^{\infty}C_ne^{jn\omega_0t}$ | $2\pi\sum_{n=-\infty}^{\infty}C_n\delta(\omega-n\omega_0)$ | 周期信号在频域中表现为离散谱线。 |
+| **单位冲激串** $\delta_T(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT)$ | $\omega_0\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_0)$ | 其中 $\omega_0=2\pi/T$。时域周期，频域也周期。 |
+
+### 📌 矩形脉冲的有效带宽
+
+对宽度为 \(\tau\) 的矩形脉冲，
+
+$$
+p_\tau(t)\longleftrightarrow \tau Sa\left(\frac{\omega\tau}{2}\right)
+$$
+
+它的第一零点位于
+
+$$
+\omega=\pm\frac{2\pi}{\tau}
+$$
+
+因此工程上常把
+
+$$
+\omega_B=\frac{2\pi}{\tau}
+$$
+
+称为矩形脉冲的**有效带宽**。  
+这也再次说明：**时域越窄，频域越宽。**
 
 ---
 
@@ -70,7 +95,17 @@ $$x(t) e^{j\omega_0 t} \longleftrightarrow X(j(\omega - \omega_0))$$
 > **推论公式**：$x(t)\cos(\omega_0 t) \longleftrightarrow \frac{1}{2}[X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))]$
 
 ### 6. 频域/时域对称性 (对偶性 Reciprocal/Duality)
-$$x(t) \longleftrightarrow X(j\omega) \implies X(jt) \longleftrightarrow 2\pi x(-\omega)$$
+若
+
+$$
+x(t)\longleftrightarrow X(j\omega)
+$$
+
+则
+
+$$
+X(t)\longleftrightarrow 2\pi x(-\omega)
+$$
 **超神用法**：
 遇到求 $Sa(t)$ 函数的频谱时直接用！矩形波对应 $Sa(\omega)$，反过来 $Sa(t)$ 对应频域的矩形波！
 考题中经常出现求 $x(t) = \frac{\sin t}{t} = Sa(t)$ 的频谱。你不可能积分积出来！
@@ -85,6 +120,31 @@ $$x(t) \longleftrightarrow X(j\omega) \implies X(jt) \longleftrightarrow 2\pi x(
     **做题利器**：如果波形有**直上直下的跳变点**，求一次导就会变成一系列的冲激函数 $\delta(t)$。如果波形是**折线**，求两次导就会变成冲激！然后利用 $\delta(t) \leftrightarrow 1$ 及平移性质瞬间解题。
 *   **积分**：$\int_{-\infty}^{t} x(\tau) d\tau \longleftrightarrow \frac{1}{j\omega}X(j\omega) + \pi X(0)\delta(\omega)$
     **避坑**：千万别忘了加上 $\pi X(0)\delta(\omega)$！这是因为积分可能会产生一个直流分量，必须在 $\omega=0$ 处补上一个冲激。
+
+#### 7.1 修正后的时域微分性质
+
+课件中特别强调：  
+若只知道导数 \(x_1(t)=x'(t)\) 的频谱 \(X_1(j\omega)\)，直接写
+
+$$
+X(j\omega)=\frac{X_1(j\omega)}{j\omega}
+$$
+
+有时会**丢失直流分量**。  
+更完整的形式应写为：
+
+$$
+X(j\omega) =
+\pi\left[x(+\infty)+x(-\infty)\right]\delta(\omega)
++
+\frac{X_1(j\omega)}{j\omega}
+$$
+
+这个修正项为什么会出现？  
+因为求导会把常数分量消掉，而常数分量在频域中正对应 \(\omega=0\) 处的冲激。
+
+**典型场景**：  
+如果原信号在 \(t\to\pm\infty\) 时不都趋于 0，或者信号本身带有直流基底，那么只靠普通微分性质就可能少掉 \(\delta(\omega)\) 项。
 
 ### 8. 频域微分性质 (Frequency Differentiation)
 $$t \cdot x(t) \longleftrightarrow j\frac{dX(j\omega)}{d\omega}$$

@@ -13,7 +13,7 @@ $$ X(z) = \mathscr{Z}\{x[k]\} = \sum_{k=0}^{+\infty} x[k] z^{-k} $$
     根据定义，只有当 $k=0$ 时 $\delta[0]=1$，其余时刻全为 0。
     $$ X(z) = \sum_{k=0}^{\infty} \delta[k] z^{-k} = 1 \cdot z^{-0} = \mathbf{1} $$
 *   **收敛域 (ROC)**：
-    因为 $z^0 = 1$（对任意 $z \neq 0$ 成立，通常认为整个平面收敛），所以 **$|z| \ge 0$**（全 z 平面收敛）。
+    因为这里根本不存在无穷级数求和，$X(z)=1$ 对任意有限 $z$ 都成立，所以它的 ROC 就是**整个 z 平面**。这也是有限长序列最简单的情形。
 *   **物理意义**：离散域的冲激信号包含了所有的频率成分，且能量均匀分布。
 
 ---
@@ -82,13 +82,14 @@ $$ \mathbf{X(z) = \frac{z\sin(\Omega_0)}{z^2 - 2z\cos(\Omega_0) + 1}} $$
 | 时域信号 $x[k]$ | Z 变换 $X(z)$ (负幂次形式 / DSP常用) | Z 变换 $X(z)$ (正幂次形式 / 极点分析常用) | 收敛域 (ROC) |
 | :--- | :--- | :--- | :--- |
 | **$\delta[k]$** (冲激) | $1$ | $1$ | 全 $z$ 平面 |
-| **$u[k]$** (阶跃) | $\frac{1}{1 - z^{-1}}$ | $\mathbf{\frac{z}{z - 1}}$ | $|z| > 1$ |
-| **$a^k u[k]$** (指数) | $\frac{1}{1 - az^{-1}}$ | $\mathbf{\frac{z}{z - a}}$ | $|z| > |a|$ |
-| **$e^{j\Omega_0 k} u[k]$** (虚指数) | $\frac{1}{1 - e^{j\Omega_0}z^{-1}}$ | $\mathbf{\frac{z}{z - e^{j\Omega_0}}}$ | $|z| > 1$ |
-| **$\cos(\Omega_0 k)u[k]$** (余弦) | $\frac{1 - z^{-1}\cos\Omega_0}{1 - 2z^{-1}\cos\Omega_0 + z^{-2}}$ | $\mathbf{\frac{z(z - \cos\Omega_0)}{z^2 - 2z\cos\Omega_0 + 1}}$ | $|z| > 1$ |
-| **$\sin(\Omega_0 k)u[k]$** (正弦) | $\frac{z^{-1}\sin\Omega_0}{1 - 2z^{-1}\cos\Omega_0 + z^{-2}}$ | $\mathbf{\frac{z\sin\Omega_0}{z^2 - 2z\cos\Omega_0 + 1}}$ | $|z| > 1$ |
+| **$u[k]$** (阶跃) | $\frac{1}{1 - z^{-1}}$ | $\mathbf{\frac{z}{z - 1}}$ | $\lvert z \rvert > 1$ |
+| **$a^k u[k]$** (指数) | $\frac{1}{1 - az^{-1}}$ | $\mathbf{\frac{z}{z - a}}$ | $\lvert z \rvert > \lvert a \rvert$ |
+| **$e^{j\Omega_0 k} u[k]$** (虚指数) | $\frac{1}{1 - e^{j\Omega_0}z^{-1}}$ | $\mathbf{\frac{z}{z - e^{j\Omega_0}}}$ | $\lvert z \rvert > 1$ |
+| **$\cos(\Omega_0 k)u[k]$** (余弦) | $\frac{1 - z^{-1}\cos\Omega_0}{1 - 2z^{-1}\cos\Omega_0 + z^{-2}}$ | $\mathbf{\frac{z(z - \cos\Omega_0)}{z^2 - 2z\cos\Omega_0 + 1}}$ | $\lvert z \rvert > 1$ |
+| **$\sin(\Omega_0 k)u[k]$** (正弦) | $\frac{z^{-1}\sin\Omega_0}{1 - 2z^{-1}\cos\Omega_0 + z^{-2}}$ | $\mathbf{\frac{z\sin\Omega_0}{z^2 - 2z\cos\Omega_0 + 1}}$ | $\lvert z \rvert > 1$ |
 
 > **🌟 避坑提示**：
 > 1. 注意正弦和余弦公式的**分母是完全一样**的！都是 $z^2 - 2z\cos(\Omega_0) + 1$。
 > 2. 正弦公式的分子**没有 $z^2$** 项，只有 $z\sin(\Omega_0)$；而余弦公式的分子带有 $z^2$ 项。
 > 3. 以上给出的是“单边”信号的变换（都乘了 $u[k]$），所以它们的收敛域统统都是 **“某个圆的外部 ($|z| > R$)”**！
+> 4. 这些表格公式默认对应的是**右边序列**。若题目只给出同一个代数式而不写 ROC，时域结果并不唯一。

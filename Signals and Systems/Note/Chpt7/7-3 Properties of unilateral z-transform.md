@@ -83,7 +83,7 @@ $$ \sum_{n=0}^{k} x[n] \longleftrightarrow \frac{1}{1 - z^{-1}} X(z) = \mathbf{\
 
 课件在 Slide 7 顺带提到了自相关函数的双边 Z 变换特性：
 $$ R_x[n] = \sum_{k=-\infty}^{+\infty} x[k]x[n+k] \longleftrightarrow \mathbf{X(z)X(z^{-1})} $$
-*(注：如果原信号是因果的，其翻转信号 $x[-n]$ 就是反因果的，Z 变换中对应将 $z$ 替换为 $z^{-1}$。因此自相关等效于 $x[n] * x[-n] \leftrightarrow X(z)X(z^{-1})$)*。
+*(注：这一条本质上是**双边 Z 变换**性质，不是单边移位公式的直接延伸。如果原信号是因果的，其翻转信号 $x[-n]$ 就是反因果的，Z 变换中对应将 $z$ 替换为 $z^{-1}$。因此自相关等效于 $x[n] * x[-n] \leftrightarrow X(z)X(z^{-1})$)*。
 
 ---
 **🎯 总结建议**：

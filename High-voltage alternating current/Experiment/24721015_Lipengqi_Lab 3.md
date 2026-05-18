@@ -1,7 +1,10 @@
-# Comprehensive Laboratory Report: Advanced AC Circuit
-**Laboratory Exercise No: 3 - Measurement for Transfer Function**
+<div style="page-break-before: always; display: block;"></div>
 
-**Team Members:**[Li Pengqi 24721015] & [Guo Qingjie 24721007]
+<div align="center" style="width: 100%; height: 280mm; display: flex; align-items: center; justify-content: center; overflow: hidden; page-break-inside: avoid;">
+  <img src="https://free.boltp.com/2026/05/10/69fff76af31ce.webp" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Image 2">
+</div>
+
+<div style="page-break-after: always; display: block;"></div>
 
 ## 1. Introduction
 The main objective of this laboratory exercise is to systematically test and verify the frequency response characteristics of fundamental AC circuits. By utilizing a digital oscilloscope and a function waveform generator, we aim to measure the driving point impedance of series and parallel AC networks across various frequencies. Furthermore, this experiment investigates the transfer functions (voltage gain and phase shift) of 1st-order RC low-pass and high-pass filters. A critical component of this report is the incorporation of empirical component measurements to construct an adjusted theoretical model, followed by a rigorous error analysis comparing ideal theories with practical measurements.
@@ -77,12 +80,12 @@ The components exhibited natural manufacturing tolerances, particularly the capa
 <table style="border-collapse: collapse; margin: 0 auto;">
     <tr>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc530fa6784.jpg" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a0080e75c230.jpg" width="80%">
             <br>
             <em>Figure 1: Circuit of 1(a)</em>
         </td>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc530f8563b.jpg" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a0080e749479.jpg" width="80%">
             <br>
             <em>Figure 2: Circuit of 1(b)</em>
         </td>
@@ -105,7 +108,7 @@ Current $I$ is calculated as $V_R / 10.24\text{ }\Omega$. Impedance $|Z| = V_{in
 | | $10 \text{ kHz}$| $2.00 \text{ V}$ | $34.0 \text{ mV}$ | $3.32 \text{ mA}$ | $602.4 \text{ }\Omega$ | $4.4 \text{ }\mu\text{s}$ | $-15.8^\circ$ |
 
 <center>
-    <img src = "https://free.picui.cn/free/2026/05/07/69fc5231177d7.jpg"
+    <img src = "https://free.picui.cn/free/2026/05/10/6a0080e742b48.jpg"
         width = 50%>
 </center>
 <center>
@@ -135,12 +138,12 @@ During the dynamic frequency sweep, the actual input voltage $V_{in}$ exhibited 
 <table style="border-collapse: collapse; margin: 0 auto;">
     <tr>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf3a4ec.png" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a008033ab4c9.png" width="80%">
             <br>
             <em>Figure 4: Multisim Diagram (dB)</em>
         </td>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf13433.png" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a00803413036.png" width="80%">
             <br>
             <em>Figure 5: Multisim Diagram (deg)</em>
         </td>
@@ -166,12 +169,12 @@ During the dynamic frequency sweep, the actual input voltage $V_{in}$ exhibited 
 <table style="border-collapse: collapse; margin: 0 auto;">
     <tr>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf13870.png" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a0080338dca8.png" width="80%">
             <br>
             <em>Figure 6: Multisim Diagram (Voltage Ratio)</em>
         </td>
         <td style="text-align: center; padding: 10px;">
-            <img src="https://free.picui.cn/free/2026/05/07/69fc4ccf33dec.png" width="80%">
+            <img src="https://free.picui.cn/free/2026/05/10/6a0080338e7b7.png" width="80%">
             <br>
             <em>Figure 7: Multisim Diagram (deg)</em>
         </td>

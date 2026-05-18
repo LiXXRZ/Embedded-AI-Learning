@@ -22,6 +22,35 @@
 2.  **周期性 (Periodic)**：周期固定为 $\mathbf{2\pi}$。即 $X(e^{j(\Omega+2\pi)}) = X(e^{j\Omega})$。
     *(证明极简：因为 $e^{-j(\Omega+2\pi)k} = e^{-j\Omega k} \cdot e^{-j2\pi k}$，而 $e^{-j2\pi k} \equiv 1$)*
 
+### 📌 收敛性要点
+
+课件给出的条件是：
+
+$$
+\sum_{k=-\infty}^{\infty}|x[k]|<\infty
+$$
+
+若满足绝对可和，则 DTFT 一定存在。  
+这是一条**充分条件**，不是“当且仅当”条件；但在本课程常规题目中，它已经足够作为最常用的判别标准。
+
+### 📌 幅相表示
+
+DTFT 也可以写成：
+
+$$
+X(e^{j\Omega}) =
+|X(e^{j\Omega})|e^{j\varphi(\Omega)}
+$$
+
+其中：
+
+- \(|X(e^{j\Omega})|\)：幅度谱；
+- \(\varphi(\Omega)\)：相位谱；
+- 相位主值区间通常取
+  $$
+  -\pi<\varphi(\Omega)\le\pi
+  $$
+
 ---
 
 ## 二、 🍎 三大基础信号的 DTFT 变换对 (一定要熟记)
@@ -36,6 +65,8 @@ $$ \delta[k] \longleftrightarrow 1 $$
 *   **收敛条件**：必须 $|\alpha| < 1$。
 *   **结果**：
     $$ \alpha^k u[k] \longleftrightarrow \frac{1}{1 - \alpha e^{-j\Omega}} $$
+
+若 \(|\alpha|>1\)，序列不满足绝对可和条件，课件中直接判定其 DTFT 不存在。
 
 ### 3. 离散矩形序列 (宽度为 $2M+1$)
 在 $k \in [-M, M]$ 时值为 1，其余为 0。
@@ -56,12 +87,22 @@ $$ax_1[k] + bx_2[k] \longleftrightarrow aX_1(e^{j\Omega}) + bX_2(e^{j\Omega})$$
 *   **幅度谱** $|X(e^{j\Omega})|$ 必为**偶函数**。
 *   **相位谱** $\varphi(\Omega)$ 必为**奇函数**。
 
+更细一点地说：
+
+- 实部 \(X_R(e^{j\Omega})\) 为偶函数；
+- 虚部 \(X_I(e^{j\Omega})\) 为奇函数。
+
 ### 3. 时域移位性质 (Time Shift)
 $$x[k-n] \longleftrightarrow X(e^{j\Omega})e^{-j\Omega n}$$
 > **💡 应用 (Slide 15 vs 17)**：
 > 序列 $x_{centered}[k] = \{1, \underline{2}, 1\}$，它的谱是 $2(1+\cos\Omega)$，没有虚部，相位为0。
 > 如果把它向右平移 1 位，变成因果序列 $y[k] = \{\underline{1}, 2, 1\}$，即 $y[k] = x[k-1]$。
 > 那么 $Y(e^{j\Omega}) = 2(1+\cos\Omega)e^{-j\Omega}$，幅度谱不变，但**多了一个线性相移 $-\Omega$**。
+
+这类题最容易考的结论是：
+
+- **时移不改幅度谱**；
+- **时移只改相位谱**。
 
 ### 4. 频域移位性质 (Frequency Shift)
 $$x[k]e^{j\Omega_0 k} \longleftrightarrow X(e^{j(\Omega-\Omega_0)})$$
@@ -74,6 +115,8 @@ $$x[k]e^{j\Omega_0 k} \longleftrightarrow X(e^{j(\Omega-\Omega_0)})$$
 ### 5. 卷积特性 (Convolution)
 *   **时域卷积 = 频域相乘**： $x[k] * h[k] \longleftrightarrow X(e^{j\Omega})H(e^{j\Omega})$
 *   **时域相乘 = 频域周期卷积**： $x[k] \cdot h[k] \longleftrightarrow \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\theta})H(e^{j(\Omega-\theta)}) d\theta$
+
+注意这里的频域卷积本质上是**按 \(2\pi\) 周期进行的卷积**，这和连续时间傅里叶变换中的普通卷积很容易混淆。
 
 ### 6. 频域微分 (Frequency Differentiation)
 用来求前面带 $k$ 的序列：
@@ -131,3 +174,17 @@ $$ \sum_{k=-\infty}^{\infty} |x[k]|^2 = \frac{1}{2\pi} \int_{<2\pi>} |X(e^{j\Ome
 > 但是计算机内存是有限的，不能处理连续时间，所以我们要进行**采样（离散化）**；
 > 计算机也不能存无穷长的信号，所以我们要把信号当做**周期循环（周期化）**。
 > 当我们在计算机里同时做到了“离散化+周期化”，我们就走到了 **DFS**（工程上通常利用其主值区间，也就是大名鼎鼎的 **DFT / FFT 快速傅里叶变换**，这是下一门课《数字信号处理》的核心起点！）。
+
+### 📌 与前几节最容易混淆的一张表
+
+| 时域信号 | 使用工具 | 频域结果 |
+| --- | --- | --- |
+| 连续周期 | CTFS | 离散、非周期 |
+| 连续非周期 | CTFT | 连续、非周期 |
+| 离散周期 | DFS | 离散、周期 |
+| 离散非周期 | DTFT | 连续、周期 |
+
+记忆时只抓两条：
+
+1. **时域离散 \(\Rightarrow\) 频域周期**
+2. **时域周期 \(\Rightarrow\) 频域离散**

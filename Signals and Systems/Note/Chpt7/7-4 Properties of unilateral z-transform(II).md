@@ -60,7 +60,20 @@ $$ k \cdot x[k]u[k] \longleftrightarrow -z \frac{d X(z)}{dz} $$
 
 ---
 
-## 五、 👑 卷积性质 (Convolution Property)
+## 五、 🔁 时间反转性质 (Time Reversal)
+
+若采用双边 Z 变换，时间反转对应把 $z$ 换成 $z^{-1}$：
+$$ x[-k] \longleftrightarrow X(z^{-1}) $$
+若原序列的 ROC 为
+$$ R_- < |z| < R_+ $$
+则反转后的 ROC 变成
+$$ \frac{1}{R_+} < |z| < \frac{1}{R_-} $$
+
+> **注意**：课件虽然把它放在“单边 Z 变换性质”里一起讲，但这条性质在**双边 Z 变换**里最自然。若原来是因果右边序列，反转后通常会变成左边序列，不能再机械地按单边右边序列理解。
+
+---
+
+## 六、 👑 卷积性质 (Convolution Property)
 与连续系统的拉氏变换一模一样：**时域卷积 = Z 域相乘**。
 $$ x_1[k] * x_2[k] \longleftrightarrow X_1(z) \cdot X_2(z) $$
 
@@ -81,7 +94,7 @@ $$ x_1[k] * x_2[k] \longleftrightarrow X_1(z) \cdot X_2(z) $$
 
 ---
 
-## 六、 ➕ 累加性质 (Summation Property)
+## 七、 ➕ 累加性质 (Summation Property)
 在连续系统中，积分对应除以 $s$；在离散系统中，**从 $0$ 累加到 $k$** 对应乘以 $\frac{1}{1-z^{-1}}$（或者写成 $\frac{z}{z-1}$）。
 $$ \sum_{n=0}^{k} x[n] \longleftrightarrow \frac{1}{1 - z^{-1}} X(z) = \mathbf{\frac{z}{z-1} X(z)} $$
 > **💡 物理直觉推导**：
@@ -90,7 +103,7 @@ $$ \sum_{n=0}^{k} x[n] \longleftrightarrow \frac{1}{1 - z^{-1}} X(z) = \mathbf{\
 
 ---
 
-## 七、 🕰️ 初值定理与终值定理 (Initial & Final Value)
+## 八、 🕰️ 初值定理与终值定理 (Initial & Final Value)
 
 在不知道时域表达式的情况下，直接通过 $X(z)$ 求时域的起点和终点值。
 
@@ -103,4 +116,4 @@ $$ \mathbf{x[0] = \lim_{z \to \infty} X(z)} $$
 求信号经过无限长的时间后稳定在什么值：
 $$ \mathbf{x[+\infty] = \lim_{z \to 1} (z-1)X(z)} $$
 **🚨 绝对致命的限制条件**：
-使用终值定理前，**必须确保 $(z-1)X(z)$ 的所有极点都严格位于单位圆内部（即 $|z| < 1$）**！如果极点在单位圆外或虚轴上（比如正弦震荡信号），信号根本不收敛，终值不存在，强行套公式会得到荒谬的错误答案！
+使用终值定理前，必须先确认 **$(z-1)X(z)$ 的 ROC 包含单位圆**；对常见的因果有理序列，这通常等价于 **$(z-1)X(z)$ 的全部极点严格位于单位圆内部**。如果极点落在单位圆上或单位圆外，序列通常不收敛，终值定理就不能硬套。
