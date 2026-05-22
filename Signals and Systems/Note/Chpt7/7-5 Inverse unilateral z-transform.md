@@ -91,8 +91,8 @@ $$ X(z)=\frac{2z^2-0.5z}{z^2-0.5z-0.5},\quad |z|>1 $$
 
 | 标准式 | ROC | 逆 Z 变换 |
 | :--- | :--- | :--- |
-| $\frac{z}{z-a}$ | $|z|>|a|$ | $a^ku[k]$ |
-| $\frac{z}{z-a}$ | $|z|<|a|$ | $-a^ku[-k-1]$ |
+| $\frac{z}{z-a}$ | $\vert z \vert > \vert a \vert$ | $a^ku[k]$ |
+| $\frac{z}{z-a}$ | $\vert z \vert < \vert a \vert$$ | $-a^ku[-k-1]$ |
 
 常见重极点：
 
