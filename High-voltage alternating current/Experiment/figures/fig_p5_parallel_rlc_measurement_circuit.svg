@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .wire { stroke: #111; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke: #111; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .comp { stroke: #111; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { stroke: #4d4d4d; stroke-width: 2.5; stroke-dasharray: 8 8; fill: none; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 28px; fill: #111; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 21px; fill: #111; }
+      .note { font-family: Arial, Helvetica, sans-serif; font-size: 20px; fill: #333; }
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 34px; font-weight: 700; fill: #111; }
+      .box { fill: #f7fafc; stroke: #7f8c8d; stroke-width: 2; rx: 10; }
+      .node { fill: #111; }
+      .accent { stroke: #1f77b4; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .green { stroke: #1f8f4d; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/>
+    </marker>
+    <marker id="arrowblue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">Fig. P5: Parallel RLC Resonance Measurement Circuit</text>
+  <text x="700" y="92" text-anchor="middle" class="note">Op-amp current source based on Figure 2; replace R_L with the parallel RLC network.</text>
+
+  <!-- Op amp -->
+  <path d="M 390 235 L 390 465 L 610 350 Z" class="comp"/>
+  <text x="414" y="292" class="label">+</text>
+  <text x="418" y="410" class="label">-</text>
+  <text x="462" y="358" class="small">op amp</text>
+
+  <!-- Input source Vs -->
+  <circle cx="160" cy="285" r="48" class="comp"/>
+  <text x="148" y="276" class="label">+</text>
+  <text x="152" y="313" class="label">-</text>
+  <text x="112" y="365" class="label">V_s</text>
+  <path d="M 160 237 L 160 190 L 390 190 L 390 280" class="wire"/>
+  <path d="M 160 333 L 160 640" class="wire"/>
+  <path d="M 160 640 L 160 665 M 126 665 L 194 665 M 138 684 L 182 684 M 150 703 L 170 703" class="thin"/>
+  <text x="85" y="745" class="small">Signal source</text>
+
+  <!-- Sense node and Ri -->
+  <path d="M 390 405 L 305 405" class="wire"/>
+  <circle cx="305" cy="405" r="7" class="node"/>
+  <path d="M 305 405 L 305 480" class="wire"/>
+  <path d="M 305 480 L 282 494 L 328 522 L 282 550 L 328 578 L 282 606 L 305 620" class="comp"/>
+  <path d="M 305 620 L 305 640" class="wire"/>
+  <path d="M 305 640 L 305 665 M 271 665 L 339 665 M 283 684 L 327 684 M 295 703 L 315 703" class="thin"/>
+  <text x="338" y="560" class="label">R_i</text>
+  <text x="338" y="590" class="small">sets current</text>
+  <text x="238" y="385" class="small">V_- node</text>
+
+  <!-- Op amp output to top bus -->
+  <path d="M 610 350 L 695 350 L 695 175 L 1120 175" class="wire"/>
+  <circle cx="695" cy="350" r="7" class="node"/>
+  <text x="628" y="330" class="small">output</text>
+
+  <!-- Bottom bus back to inverting node -->
+  <path d="M 305 405 L 305 560 L 695 560 L 695 640 L 1120 640" class="wire"/>
+  <circle cx="695" cy="560" r="7" class="node"/>
+
+  <!-- Parallel RLC network border labels -->
+  <rect x="665" y="135" width="505" height="560" class="dash"/>
+  <text x="740" y="125" class="label">Replace R_L with this parallel RLC network</text>
+
+  <!-- Capacitor branch -->
+  <path d="M 820 175 L 820 325" class="wire"/>
+  <path d="M 785 325 L 855 325 M 785 365 L 855 365" class="comp"/>
+  <path d="M 820 365 L 820 640" class="wire"/>
+  <circle cx="820" cy="175" r="6" class="node"/>
+  <circle cx="820" cy="640" r="6" class="node"/>
+  <text x="760" y="356" class="label">C</text>
+  <text x="744" y="392" class="small">47 nF</text>
+
+  <!-- Inductor branch with series resistance r -->
+  <path d="M 1000 175 L 1000 225" class="wire"/>
+  <path d="M 1000 225 L 975 240 L 1025 270 L 975 300 L 1025 330 L 975 360 L 1000 375" class="comp"/>
+  <text x="1038" y="315" class="label">r</text>
+  <text x="1038" y="344" class="small">inductor DC resistance</text>
+  <path d="M 1000 375 L 1000 412" class="wire"/>
+  <path d="M 1000 412 C 968 426 1032 454 1000 468 C 968 482 1032 510 1000 524 C 968 538 1032 566 1000 580" class="comp"/>
+  <path d="M 1000 580 L 1000 640" class="wire"/>
+  <circle cx="1000" cy="175" r="6" class="node"/>
+  <circle cx="1000" cy="640" r="6" class="node"/>
+  <text x="1038" y="505" class="label">L</text>
+  <text x="1038" y="536" class="small">20 mH</text>
+
+  <!-- Current arrow -->
+  <path d="M 735 210 L 735 595" class="accent" marker-end="url(#arrowblue)"/>
+  <text x="700" y="405" class="label" fill="#1f77b4">i_0</text>
+  <text x="690" y="435" class="small" fill="#1f77b4">approx. constant</text>
+
+  <!-- Voltage measurement -->
+  <path d="M 1170 175 L 1235 175 M 1170 640 L 1235 640" class="thin"/>
+  <path d="M 1220 190 L 1220 625" class="green" marker-end="url(#arrow)"/>
+  <text x="1252" y="195" class="label">+</text>
+  <text x="1257" y="648" class="label">-</text>
+  <text x="1255" y="402" class="label">V_o</text>
+  <text x="1248" y="434" class="small">measure for V-f curve</text>
+
+  <!-- Equation and steps box -->
+  <rect x="545" y="725" width="760" height="125" class="box"/>
+  <text x="570" y="762" class="small">Feedback makes V_- approximately equal to V_+ = V_s.</text>
+  <text x="570" y="797" class="small">Current source relation: i_0 approximately equals V_s / R_i.</text>
+  <text x="570" y="832" class="small">Sweep frequency from 2 kHz to 10 kHz and plot V_o versus f. Peak V_o gives f_0.</text>
+
+  <!-- Ground reference text -->
+  <text x="90" y="815" class="note">All grounds are common with the signal source and op-amp supply reference.</text>
+</svg>

@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <style>
+      .panel { fill: #ffffff; stroke: #2c3e50; stroke-width: 2; rx: 8; }
+      .wire { stroke: #111; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke: #111; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .comp { stroke: #111; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .text { font-family: Arial, Helvetica, sans-serif; fill: #111; font-size: 22px; }
+      .small { font-family: Arial, Helvetica, sans-serif; fill: #111; font-size: 17px; }
+      .title { font-family: Arial, Helvetica, sans-serif; fill: #111; font-size: 26px; font-weight: 700; }
+      .muted { font-family: Arial, Helvetica, sans-serif; fill: #555; font-size: 16px; }
+      .axis { stroke: #222; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .curve10 { stroke: #c0392b; stroke-width: 4; fill: none; }
+      .curve100 { stroke: #2471a3; stroke-width: 4; fill: none; }
+      .curvep { stroke: #1e8449; stroke-width: 4; fill: none; }
+      .dash { stroke: #777; stroke-width: 2; stroke-dasharray: 7 7; fill: none; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1200" fill="#f3f6f8"/>
+  <text x="800" y="46" text-anchor="middle" class="title">Prelab Figures P1-P6: What Each Figure Should Look Like</text>
+  <text x="800" y="76" text-anchor="middle" class="muted">P1, P2, and P5 are circuit schematics. P3, P4, and P6 are Multisim AC sweep response plots.</text>
+
+  <!-- Panel P1 -->
+  <rect x="40" y="110" width="480" height="310" class="panel"/>
+  <text x="60" y="148" class="title">Fig. P1: Series RLC, R = 10 ohm</text>
+  <circle cx="105" cy="260" r="36" class="comp"/>
+  <text x="96" y="251" class="text">+</text>
+  <text x="99" y="280" class="text">-</text>
+  <text x="66" y="325" class="text">Vs</text>
+  <path d="M105 224 L105 190 L190 190" class="wire"/>
+  <path d="M190 190 C203 170 217 210 230 190 C243 170 257 210 270 190 C283 170 297 210 310 190" class="comp"/>
+  <text x="224" y="162" class="text">L = 20 mH</text>
+  <path d="M310 190 L365 190" class="wire"/>
+  <path d="M365 160 L365 220 M385 160 L385 220" class="comp"/>
+  <text x="344" y="250" class="text">C = 47 nF</text>
+  <path d="M385 190 L430 190 L430 235" class="wire"/>
+  <path d="M430 235 L410 245 L450 265 L410 285 L450 305 L410 325 L430 335" class="comp"/>
+  <text x="450" y="292" class="text">R = 10 ohm</text>
+  <path d="M430 335 L430 360 L105 360 L105 296" class="wire"/>
+  <path d="M430 360 L430 380 M410 380 L450 380 M418 394 L442 394 M425 408 L435 408" class="thin"/>
+  <text x="248" y="397" class="small">Measure V_R across R, I = V_R / R</text>
+
+  <!-- Panel P2 -->
+  <rect x="560" y="110" width="480" height="310" class="panel"/>
+  <text x="580" y="148" class="title">Fig. P2: Series RLC, R = 100 ohm</text>
+  <circle cx="625" cy="260" r="36" class="comp"/>
+  <text x="616" y="251" class="text">+</text>
+  <text x="619" y="280" class="text">-</text>
+  <text x="586" y="325" class="text">Vs</text>
+  <path d="M625 224 L625 190 L710 190" class="wire"/>
+  <path d="M710 190 C723 170 737 210 750 190 C763 170 777 210 790 190 C803 170 817 210 830 190" class="comp"/>
+  <text x="744" y="162" class="text">L = 20 mH</text>
+  <path d="M830 190 L885 190" class="wire"/>
+  <path d="M885 160 L885 220 M905 160 L905 220" class="comp"/>
+  <text x="864" y="250" class="text">C = 47 nF</text>
+  <path d="M905 190 L950 190 L950 235" class="wire"/>
+  <path d="M950 235 L930 245 L970 265 L930 285 L970 305 L930 325 L950 335" class="comp"/>
+  <text x="970" y="292" class="text">R = 100 ohm</text>
+  <path d="M950 335 L950 360 L625 360 L625 296" class="wire"/>
+  <path d="M950 360 L950 380 M930 380 L970 380 M938 394 L962 394 M945 408 L955 408" class="thin"/>
+  <text x="768" y="397" class="small">Same circuit, only R changes to 100 ohm</text>
+
+  <!-- Panel P3 -->
+  <rect x="1080" y="110" width="480" height="310" class="panel"/>
+  <text x="1100" y="148" class="title">Fig. P3: AC Sweep, R = 10 ohm</text>
+  <path d="M1140 360 L1140 190 M1140 360 L1510 360" class="axis"/>
+  <text x="1315" y="397" class="small">Frequency, f</text>
+  <text x="1095" y="184" class="small">I or V_R</text>
+  <path d="M1145 352 C1210 350 1265 342 1295 305 C1307 288 1313 222 1322 196 C1331 222 1337 288 1349 305 C1383 343 1455 350 1505 352" class="curve10"/>
+  <path d="M1322 190 L1322 360" class="dash"/>
+  <path d="M1294 305 L1349 305" class="dash"/>
+  <text x="1305" y="181" class="small">f0</text>
+  <text x="1266" y="327" class="small">f1</text>
+  <text x="1358" y="327" class="small">f2</text>
+  <text x="1165" y="235" class="small">Narrow, sharp peak</text>
+
+  <!-- Panel P4 -->
+  <rect x="40" y="460" width="480" height="310" class="panel"/>
+  <text x="60" y="498" class="title">Fig. P4: AC Sweep, R = 100 ohm</text>
+  <path d="M100 710 L100 540 M100 710 L470 710" class="axis"/>
+  <text x="275" y="747" class="small">Frequency, f</text>
+  <text x="55" y="534" class="small">I or V_R</text>
+  <path d="M105 700 C170 690 220 650 250 605 C265 582 275 565 285 555 C296 565 306 582 321 605 C352 650 404 690 465 700" class="curve100"/>
+  <path d="M285 555 L285 710" class="dash"/>
+  <path d="M220 635 L350 635" class="dash"/>
+  <text x="268" y="545" class="small">f0</text>
+  <text x="196" y="660" class="small">f1</text>
+  <text x="358" y="660" class="small">f2</text>
+  <text x="130" y="575" class="small">Wider, lower-Q response</text>
+
+  <!-- Panel P5 -->
+  <rect x="560" y="460" width="480" height="310" class="panel"/>
+  <text x="580" y="498" class="title">Fig. P5: Parallel RLC Measurement Circuit</text>
+  <text x="580" y="524" class="muted">Use Figure 2 current source idea; replace R_L with parallel RLC.</text>
+  <circle cx="620" cy="625" r="30" class="comp"/>
+  <text x="612" y="619" class="text">+</text>
+  <text x="615" y="645" class="text">-</text>
+  <text x="585" y="685" class="text">Vs</text>
+  <path d="M620 595 L620 560 L700 560" class="wire"/>
+  <path d="M700 560 L720 540 L760 580 L800 540 L840 580 L860 560" class="comp"/>
+  <text x="736" y="526" class="text">R_i</text>
+  <path d="M860 560 L890 560" class="wire"/>
+  <path d="M890 520 L960 560 L890 600 Z" class="comp"/>
+  <text x="904" y="548" class="text">+</text>
+  <text x="904" y="588" class="text">-</text>
+  <path d="M960 560 L990 560 L990 625" class="wire"/>
+  <path d="M990 625 L970 635 L1010 655 L970 675 L1010 695 L970 715 L990 725" class="comp"/>
+  <text x="1008" y="679" class="text">r + L</text>
+  <path d="M990 625 L930 625" class="wire"/>
+  <path d="M930 600 L930 650 M910 600 L910 650" class="comp"/>
+  <text x="892" y="684" class="text">C</text>
+  <path d="M910 625 L880 625 L880 725 L990 725" class="wire"/>
+  <path d="M990 725 L990 745 M970 745 L1010 745 M978 759 L1002 759 M985 773 L995 773" class="thin"/>
+  <path d="M880 625 L860 625 L860 580" class="wire"/>
+  <path d="M620 655 L620 725 L880 725" class="wire"/>
+  <path d="M990 560 L990 525 L860 525 L860 560" class="thin"/>
+  <text x="808" y="752" class="small">Measure V_o across parallel RLC</text>
+
+  <!-- Panel P6 -->
+  <rect x="1080" y="460" width="480" height="310" class="panel"/>
+  <text x="1100" y="498" class="title">Fig. P6: Parallel RLC V-f Curve</text>
+  <path d="M1140 710 L1140 540 M1140 710 L1510 710" class="axis"/>
+  <text x="1315" y="747" class="small">Frequency, f</text>
+  <text x="1095" y="534" class="small">V_o</text>
+  <path d="M1145 700 C1210 695 1262 670 1295 610 C1310 580 1318 555 1325 545 C1332 555 1340 580 1355 610 C1388 670 1440 695 1505 700" class="curvep"/>
+  <path d="M1325 545 L1325 710" class="dash"/>
+  <path d="M1265 625 L1384 625" class="dash"/>
+  <text x="1308" y="535" class="small">f0</text>
+  <text x="1238" y="650" class="small">f1</text>
+  <text x="1390" y="650" class="small">f2</text>
+  <text x="1165" y="575" class="small">Voltage maximum at parallel resonance</text>
+
+  <!-- Bottom notes -->
+  <rect x="40" y="820" width="1520" height="300" class="panel"/>
+  <text x="70" y="860" class="title">How to map these to Multisim screenshots</text>
+  <text x="70" y="900" class="text">P1/P2: Take screenshots of the two series RLC schematics. Use R = 10 ohm for P1 and R = 100 ohm for P2.</text>
+  <text x="70" y="940" class="text">P3/P4: Run AC Analysis from 2 kHz to 10 kHz. Plot V_R or branch current. Use cursors to mark f0, f1, and f2.</text>
+  <text x="70" y="980" class="text">P5: Draw the current-source measurement circuit. The load position from Figure 2 becomes the parallel RLC network.</text>
+  <text x="70" y="1020" class="text">P6: Run AC Analysis on P5 and plot output voltage V_o across the parallel RLC network versus frequency.</text>
+  <text x="70" y="1060" class="text">Use nominal L = 20 mH and C = 47 nF for prelab, then replace them with LCR meter values in the final report.</text>
+</svg>

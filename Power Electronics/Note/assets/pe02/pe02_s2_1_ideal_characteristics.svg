@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360">
+  <style>
+    .axis{stroke:#222;stroke-width:2;marker-end:url(#arrow)}
+    .curve{stroke:#0b66c3;stroke-width:4;fill:none;stroke-linecap:round}
+    .dash{stroke:#888;stroke-width:2;stroke-dasharray:7 7;fill:none}
+    .txt{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#111}
+    .small{font-family:Arial,Helvetica,sans-serif;font-size:15px;fill:#333}
+    .title{font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;fill:#111}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#222"/>
+    </marker>
+  </defs>
+
+  <text x="155" y="34" class="title">Ideal diode</text>
+  <line x1="85" y1="250" x2="360" y2="250" class="axis"/>
+  <line x1="220" y1="310" x2="220" y2="70" class="axis"/>
+  <text x="352" y="275" class="txt">v_D</text>
+  <text x="232" y="84" class="txt">i_D</text>
+  <text x="208" y="270" class="small">0</text>
+  <path d="M95 250 L220 250" class="curve"/>
+  <path d="M220 250 L220 90" class="curve"/>
+  <text x="96" y="235" class="small">reverse blocking: i_D=0</text>
+  <text x="232" y="122" class="small">forward on: v_D=0</text>
+
+  <text x="585" y="34" class="title">Ideal thyristor</text>
+  <line x1="515" y1="250" x2="790" y2="250" class="axis"/>
+  <line x1="650" y1="310" x2="650" y2="70" class="axis"/>
+  <text x="782" y="275" class="txt">v_AK</text>
+  <text x="662" y="84" class="txt">i_A</text>
+  <text x="638" y="270" class="small">0</text>
+  <path d="M525 250 L775 250" class="dash"/>
+  <path d="M650 250 L650 90" class="curve"/>
+  <path d="M525 250 L775 250" class="curve" opacity="0.65"/>
+  <text x="526" y="235" class="small">blocking before trigger: i_A=0</text>
+  <text x="662" y="122" class="small">after gate trigger: v_AK=0</text>
+  <text x="566" y="320" class="small">same ideal on-state as diode, but turn-on needs gate signal</text>
+</svg>

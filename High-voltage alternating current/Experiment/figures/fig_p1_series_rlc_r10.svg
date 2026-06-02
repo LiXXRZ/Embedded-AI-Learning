@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .grid-dot { fill: #d7dde2; }
+      .wire { stroke: #d62828; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .comp { stroke: #111; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke: #111; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 28px; fill: #111; font-weight: 700; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 22px; fill: #111; }
+      .node-label { font-family: Arial, Helvetica, sans-serif; font-size: 26px; fill: #d62828; font-weight: 700; }
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 34px; font-weight: 700; fill: #111; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="620"/>
+  <g opacity="0.8">
+    <circle class="grid-dot" cx="40" cy="40" r="2"/>
+    <circle class="grid-dot" cx="80" cy="40" r="2"/>
+    <circle class="grid-dot" cx="120" cy="40" r="2"/>
+    <circle class="grid-dot" cx="160" cy="40" r="2"/>
+    <circle class="grid-dot" cx="200" cy="40" r="2"/>
+    <circle class="grid-dot" cx="240" cy="40" r="2"/>
+    <circle class="grid-dot" cx="280" cy="40" r="2"/>
+    <circle class="grid-dot" cx="320" cy="40" r="2"/>
+    <circle class="grid-dot" cx="360" cy="40" r="2"/>
+    <circle class="grid-dot" cx="400" cy="40" r="2"/>
+    <circle class="grid-dot" cx="440" cy="40" r="2"/>
+    <circle class="grid-dot" cx="480" cy="40" r="2"/>
+    <circle class="grid-dot" cx="520" cy="40" r="2"/>
+    <circle class="grid-dot" cx="560" cy="40" r="2"/>
+    <circle class="grid-dot" cx="600" cy="40" r="2"/>
+    <circle class="grid-dot" cx="640" cy="40" r="2"/>
+    <circle class="grid-dot" cx="680" cy="40" r="2"/>
+    <circle class="grid-dot" cx="720" cy="40" r="2"/>
+    <circle class="grid-dot" cx="760" cy="40" r="2"/>
+    <circle class="grid-dot" cx="800" cy="40" r="2"/>
+    <circle class="grid-dot" cx="840" cy="40" r="2"/>
+    <circle class="grid-dot" cx="880" cy="40" r="2"/>
+    <circle class="grid-dot" cx="920" cy="40" r="2"/>
+    <circle class="grid-dot" cx="960" cy="40" r="2"/>
+    <circle class="grid-dot" cx="1000" cy="40" r="2"/>
+    <circle class="grid-dot" cx="1040" cy="40" r="2"/>
+    <circle class="grid-dot" cx="1080" cy="40" r="2"/>
+    <circle class="grid-dot" cx="1120" cy="40" r="2"/>
+    <circle class="grid-dot" cx="1160" cy="40" r="2"/>
+    <use href="#dotrow"/>
+  </g>
+
+  <text x="600" y="58" text-anchor="middle" class="title">Fig. P1: Series RLC Circuit, R = 10 ohm</text>
+
+  <!-- Wiring -->
+  <path d="M 145 210 L 300 210" class="wire"/>
+  <path d="M 435 210 L 560 210" class="wire"/>
+  <path d="M 690 210 L 880 210 L 880 305" class="wire"/>
+  <path d="M 880 450 L 880 500 L 145 500 L 145 282" class="wire"/>
+
+  <!-- AC source -->
+  <circle cx="145" cy="246" r="48" class="comp"/>
+  <path d="M 113 246 C 123 230 137 230 147 246 C 157 262 171 262 181 246" class="thin"/>
+  <text x="76" y="184" class="label">V1</text>
+  <text x="70" y="330" class="small">AC mag = 1 V</text>
+  <text x="70" y="360" class="small">phase = 0 deg</text>
+
+  <!-- Inductor -->
+  <path d="M 300 210 C 320 180 350 240 370 210 C 390 180 420 240 435 210" class="comp"/>
+  <text x="342" y="155" text-anchor="middle" class="label">L1</text>
+  <text x="342" y="188" text-anchor="middle" class="small">20 mH</text>
+
+  <!-- Capacitor -->
+  <path d="M 560 160 L 560 260 M 615 160 L 615 260" class="comp"/>
+  <text x="588" y="118" text-anchor="middle" class="label">C1</text>
+  <text x="588" y="150" text-anchor="middle" class="small">47 nF</text>
+  <path d="M 615 210 L 690 210" class="wire"/>
+
+  <!-- Resistor -->
+  <path d="M 880 305 L 850 320 L 910 350 L 850 380 L 910 410 L 880 425 L 880 450" class="comp"/>
+  <text x="935" y="340" class="label">R1</text>
+  <text x="935" y="374" class="small">10 ohm</text>
+
+  <!-- Ground -->
+  <path d="M 520 500 L 520 530 M 480 530 L 560 530 M 495 552 L 545 552 M 508 574 L 532 574" class="thin"/>
+
+  <!-- Nodes -->
+  <circle cx="145" cy="210" r="7" fill="#d62828"/>
+  <circle cx="560" cy="210" r="7" fill="#d62828"/>
+  <circle cx="880" cy="210" r="7" fill="#d62828"/>
+  <circle cx="520" cy="500" r="7" fill="#d62828"/>
+  <text x="152" y="176" class="node-label">1</text>
+  <text x="578" y="176" class="node-label">2</text>
+  <text x="895" y="176" class="node-label">3 / V_R</text>
+  <text x="535" y="486" class="node-label">0</text>
+
+  <text x="270" y="585" class="small">Measure resistor voltage at node 3 relative to ground: V_R = V(3).</text>
+</svg>

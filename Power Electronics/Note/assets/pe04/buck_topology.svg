@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420">
+  <style>
+    .wire{stroke:#222;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#333;stroke-width:2;fill:none}
+    .comp{stroke:#0b66c3;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .diode{stroke:#c3382b;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .txt{font-family:Arial,Helvetica,sans-serif;font-size:19px;fill:#111}
+    .small{font-family:Arial,Helvetica,sans-serif;font-size:15px;fill:#333}
+    .label{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:bold;fill:#111}
+  </style>
+
+  <text x="345" y="35" class="label">Ideal Buck Converter Topology</text>
+
+  <line x1="90" y1="110" x2="90" y2="310" class="wire"/>
+  <line x1="90" y1="110" x2="180" y2="110" class="wire"/>
+  <line x1="90" y1="310" x2="790" y2="310" class="wire"/>
+  <text x="48" y="182" class="txt">Vd</text>
+  <text x="105" y="95" class="small">+</text>
+  <text x="105" y="335" class="small">-</text>
+
+  <line x1="180" y1="110" x2="235" y2="110" class="wire"/>
+  <line x1="250" y1="88" x2="300" y2="132" class="comp"/>
+  <line x1="304" y1="110" x2="365" y2="110" class="wire"/>
+  <text x="248" y="70" class="txt">S</text>
+  <text x="218" y="154" class="small">on: 0~DTs</text>
+
+  <line x1="365" y1="110" x2="430" y2="110" class="wire"/>
+  <path d="M430 110 h18 l12 -18 l24 36 l24 -36 l24 36 l12 -18 h18" class="comp"/>
+  <line x1="610" y1="110" x2="790" y2="110" class="wire"/>
+  <text x="500" y="75" class="txt">L</text>
+  <text x="460" y="150" class="small">iL</text>
+  <path d="M455 145 h70" class="thin"/>
+  <path d="M525 145 l-12 -6 v12 z" fill="#333"/>
+
+  <line x1="365" y1="110" x2="365" y2="218" class="wire"/>
+  <line x1="330" y1="218" x2="400" y2="218" class="diode"/>
+  <path d="M330 266 h70 l-35 -48 z" class="diode"/>
+  <line x1="365" y1="266" x2="365" y2="310" class="wire"/>
+  <text x="315" y="210" class="txt">D</text>
+  <text x="260" y="285" class="small">freewheel path</text>
+
+  <line x1="665" y1="110" x2="665" y2="210" class="wire"/>
+  <line x1="635" y1="210" x2="695" y2="210" class="comp"/>
+  <line x1="635" y1="232" x2="695" y2="232" class="comp"/>
+  <line x1="665" y1="232" x2="665" y2="310" class="wire"/>
+  <text x="700" y="228" class="txt">C</text>
+
+  <line x1="790" y1="110" x2="790" y2="160" class="wire"/>
+  <path d="M790 160 v20 l-18 12 l36 24 l-36 24 l36 24 l-18 12 v34" class="comp"/>
+  <text x="817" y="225" class="txt">R</text>
+  <line x1="790" y1="310" x2="790" y2="276" class="wire"/>
+  <text x="820" y="128" class="small">+</text>
+  <text x="820" y="305" class="small">-</text>
+  <text x="820" y="215" class="txt">Vo</text>
+
+  <text x="86" y="375" class="small">S on: vL = Vd - Vo, diode off, iL rises.</text>
+  <text x="486" y="375" class="small">S off: vL = -Vo, diode conducts, iL falls.</text>
+</svg>
