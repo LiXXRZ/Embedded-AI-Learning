@@ -472,61 +472,60 @@ In the real circuit, the inductor resistance \(r\), function generator resistanc
 
 ## **8. LCR Meter Preparation**
 
-Before building the circuit, measure the real component values with the LCR 6300 meter:
+Before building the circuit, the real component values were measured with the LCR 6300 meter. The photos show that the meter was set to approximately:
 
-| Component | Parameter to measure | Measured value |
-|---|---|---:|
-| \(R=10\ \Omega\) | Resistance | __________ |
-| \(R=100\ \Omega\) | Resistance | __________ |
-| Capacitor \(47\ \text{nF}\) | \(C_S\), \(R_S\), \(Q_C\) | __________ |
-| Inductor | \(L_S\), \(R_S\), \(Q_L\) | __________ |
+- Test frequency: \(5.100\ \text{kHz}\)
+- Test level: \(1.00\ \text{V}\)
+- Trigger: internal, speed: slow
 
-The LCR meter should be warmed up for about 30 minutes before measurement. The final report should compare theoretical results using nominal values and recalculated results using measured component values.
+### **8.1 Recognized LCR Meter Readings**
 
-## **9. Lab Data Tables Prepared Before Lab**
+| Component | Meter mode | Measured value | Related value |
+|---|---|---:|---:|
+| \(R=10\ \Omega\) | Resistance | \(10.11\ \Omega\)  | Measure in lab |
+| \(R=100\ \Omega\) | Resistance | \(99.35\ \Omega\) | Measure in lab |
+| Inductor | \(L_P-R_P\) | \(L_P=20.2444\ \text{mH}\) | \(R_P=5.45603\ \text{k}\Omega\) |
+| Inductor | \(L_P-Q\) | \(L_P=20.2477\ \text{mH}\) | \(Q_L=8.37662\) |
+| Inductor | \(L_S-R_S\) | \(L_S=19.9617\ \text{mH}\) | \(R_S=76.3286\ \Omega\) |
+| Inductor | \(L_S-Q\) | \(L_S=19.9595\ \text{mH}\) | \(Q_L=8.38693\) |
+| Inductor | \(L_S-Q\) | \(L_S=19.9594\ \text{mH}\) | \(Q_L=8.38797\) |
+| Capacitor | \(C_S-R_S\) | \(C_S=44.2352\ \text{nF}\) | \(R_S=14.4147\ \Omega\) |
+| Capacitor | \(C_S-D\) | \(C_S=44.2445\ \text{nF}\) | \(D=0.02049,\ Q_C\approx48.80\) |
+| Capacitor | \(C_P-R_P\) | \(C_P=44.2538\ \text{nF}\) | \(R_P=34.2537\ \text{k}\Omega\) |
+| Capacitor | \(C_P-D\) | \(C_P=44.2204\ \text{nF}\) | \(D=0.02060,\ Q_C\approx48.54\) |
 
-### **9.1 Series RLC, \(R=10\ \Omega\)**
+For the series RLC calculation, the following representative measured values are used:
 
-| Frequency \(f\) | \(V_s\) | \(V_R\) | Current \(I=V_R/R\) | Phase observation | Notes |
-|---:|---:|---:|---:|---|---|
-| 2.0 kHz | | | | | |
-| 3.0 kHz | | | | | |
-| 4.0 kHz | | | | | |
-| 5.0 kHz | | | | | |
-| Near \(f_0\) | | | | | |
-| 5.4 kHz | | | | | |
-| 6.0 kHz | | | | | |
-| 8.0 kHz | | | | | |
-| 10.0 kHz | | | | | |
+| Quantity | Value used for calculation |
+|---|---:|
+| Series inductance \(L_S\) | \(19.9595\ \text{mH}\) |
+| Inductor series resistance \(R_{S,L}\) | \(76.3286\ \Omega\) |
+| Inductor quality factor \(Q_L\) | \(8.387\) |
+| Series capacitance \(C_S\) | \(44.2445\ \text{nF}\) |
+| Capacitor series resistance \(R_{S,C}\) | \(14.4147\ \Omega\) |
+| Capacitor dissipation factor \(D_C\) | \(0.02049\) |
+| Capacitor quality factor \(Q_C=1/D_C\) | \(48.80\) |
+| Resonant frequency from measured \(L_S,C_S\) | \(f_0\approx 5.356\ \text{kHz}\) |
 
-### **9.2 Series RLC, \(R=100\ \Omega\)**
+### **8.2 Recalculated Reference Values Using Measured \(L_S\) and \(C_S\)**
 
-| Frequency \(f\) | \(V_s\) | \(V_R\) | Current \(I=V_R/R\) | Phase observation | Notes |
-|---:|---:|---:|---:|---|---|
-| 2.0 kHz | | | | | |
-| 3.0 kHz | | | | | |
-| 4.0 kHz | | | | | |
-| 5.0 kHz | | | | | |
-| Near \(f_0\) | | | | | |
-| 5.5 kHz | | | | | |
-| 6.0 kHz | | | | | |
-| 8.0 kHz | | | | | |
-| 10.0 kHz | | | | | |
+If only the external resistor is considered, the recalculated theoretical results are:
 
-### **9.3 Parallel RLC Circuit**
+| Case | External \(R\) | \(f_0\) | \(f_1\) | \(f_2\) | Bandwidth \(B\) | \(Q=f_0/B\) | Ideal \(V_{R0}\) for \(V_s=1\ \text{V}_{pp}\) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Series RLC | \(10\ \Omega\) | 5355.69 Hz | 5315.97 Hz | 5395.71 Hz | 79.74 Hz | 67.17 | \(1.00\ \text{V}_{pp}\) |
+| Series RLC | \(100\ \Omega\) | 5355.69 Hz | 4971.82 Hz | 5769.21 Hz | 797.39 Hz | 6.72 | \(1.00\ \text{V}_{pp}\) |
 
-| Frequency \(f\) | \(V_s\) | \(V_o\) across parallel RLC | Phase observation | Notes |
-|---:|---:|---:|---|---|
-| 2.0 kHz | | | | |
-| 3.0 kHz | | | | |
-| 4.0 kHz | | | | |
-| 5.0 kHz | | | | |
-| Near \(f_0\) | | | | |
-| 6.0 kHz | | | | |
-| 8.0 kHz | | | | |
-| 10.0 kHz | | | | |
+Because the measured inductor and capacitor have non-negligible series resistance, a more practical estimate can also include \(R_{S,L}\) and \(R_{S,C}\):
 
-## **10. Error Analysis Prepared for Final Report**
+| External \(R\) | Effective series resistance \(R_{\text{total}}=R+R_{S,L}+R_{S,C}\) | Estimated \(f_1\) | Estimated \(f_2\) | Estimated \(B\) | Estimated \(Q\) | Estimated \(V_R\) at resonance, \(V_s=1\ \text{V}_{pp}\) |
+|---:|---:|---:|---:|---:|---:|---:|
+| \(10\ \Omega\) | 100.7433 \(\Omega\) | 4969.07 Hz | 5772.39 Hz | 803.32 Hz | 6.67 | 99.26 mVpp |
+| \(100\ \Omega\) | 190.7433 \(\Omega\) | 4648.93 Hz | 6169.90 Hz | 1520.97 Hz | 3.52 | 524.26 mVpp |
+
+The LCR meter should be warmed up for about 30 minutes before measurement. The final report should compare theoretical results using nominal values, recalculated results using measured \(L\) and \(C\), and practical results considering measured component loss.
+
+## **9. Error Analysis Prepared for Final Report**
 
 Possible sources of error include:
 
@@ -538,7 +537,7 @@ Possible sources of error include:
 6. Oscilloscope probe loading and multimeter frequency response may affect the measured voltage.
 7. The resonance peak for \(R=10\ \Omega\) is very narrow, so insufficient frequency resolution can cause measurement error.
 
-## **11. Prelab Conclusion**
+## **10. Prelab Conclusion**
 
 The theoretical resonant frequency of the series RLC circuit with \(L=20\ \text{mH}\) and \(C=47\ \text{nF}\) is approximately \(5.19\ \text{kHz}\). For \(R=10\ \Omega\), the circuit has a high quality factor of about 65.23 and a narrow bandwidth of about 79.58 Hz. For \(R=100\ \Omega\), the quality factor decreases to about 6.52 and the bandwidth increases to about 795.77 Hz. At resonance, the ideal resistor voltage equals the source voltage for both resistor values. The parallel resonance circuit should be measured using an approximate current source so that the resonance appears as a maximum in the voltage-frequency curve.
 
