@@ -1,602 +1,552 @@
-# Exercise 2: Boost Converter and Buck–Boost Converter Transient Response
+# Exercise 2: Boost Converter and Buck–Boost Converter Simulation Report
 
-## 1. Objective
-
-The objective of this experiment is to simulate and analyze two DC-DC converter circuits using MATLAB/Simulink.
-
-The first part investigates a Boost converter. The converter is supplied by a DC input voltage and controlled by a PWM signal. The output voltage is compared with the theoretical Boost converter voltage conversion ratio. The inductor voltage and current waveforms are also observed in order to verify the volt-second balance in steady state.
-
-The second part investigates the start-up transient response of a Buck–Boost converter. The inductor current and capacitor voltage are observed during start-up. The purpose is to study the high transient current stress that occurs before the converter reaches steady-state operation.
-
-The final part calculates the minimum PWM switching frequency required to ensure continuous conduction mode operation for a Buck/Boost converter.
+**Student:** LPQ  
+**Software:** MATLAB/Simulink, Simscape Electrical Specialized Power Systems  
+**Experiment:** Exercise 2 — Boost Converter and Buck–Boost Converter Transient Response
 
 ---
 
-## 2. Background Theory
+## 1. Objective
 
-### 2.1 Boost Converter
+The objective of this experiment is to simulate and analyze two DC/DC power converter circuits in MATLAB/Simulink:
 
-A Boost converter is a DC-DC converter that steps up the input voltage to a higher output voltage.
+1. A **Boost converter** operating from a 24 V source with 20 kHz PWM and 50% duty cycle, and then from a 20 V source while maintaining the same output voltage by adjusting the duty cycle.
+2. A **Buck–Boost converter** during start-up transient response, with focus on the inductor current and capacitor voltage waveforms.
 
-For an ideal Boost converter operating in continuous conduction mode, the voltage transfer function is:
+This report also includes the calculation of a suitable Buck–Boost duty cycle to ensure continuous conduction mode (CCM), and the calculation of the minimum PWM switching frequency required to ensure CCM for a separate converter design specification.
+
+---
+
+## 2. Boost Converter
+
+### 2.1 Background Theory
+
+A Boost converter is a DC/DC step-up converter. In continuous conduction mode, the ideal conversion ratio is:
+
+$$
+\frac{V_{out}}{V_{in}}=\frac{1}{1-D}
+$$
+
+where \(D\) is the duty cycle of the PWM control signal.
+
+The Boost converter uses the following operating principle:
+
+- When the MOSFET is ON, the inductor stores energy from the input source.
+- When the MOSFET is OFF, the inductor releases energy through the diode to the capacitor and load.
+- The output voltage is higher than the input voltage.
+
+---
+
+### 2.2 Simulink Model
+
+The Boost converter was modeled using a DC voltage source, inductor, MOSFET, diode, output capacitor, load resistor, measurement blocks, scopes, and a continuous `powergui` block.
+
+![Figure 1. Simulink model of the Boost converter.](figures/fig01_boost_converter_simulink_model.png)
+
+**Figure 1. Simulink model of the Boost converter.**
+
+---
+
+### 2.3 Case A: 20 V Input, Output Maintained at Approximately 48 V
+
+The handout requires the source to be changed to 20 V while maintaining the same output voltage as the 24 V case. The required duty cycle is calculated from:
 
 $$
 V_{out}=\frac{V_{in}}{1-D}
 $$
 
-where:
+Solving for \(D\):
 
 $$
-D
+D=1-\frac{V_{in}}{V_{out}}
 $$
 
-is the PWM duty cycle.
-
-When the MOSFET is turned on, the inductor stores energy from the input source. During this interval, the diode is reverse biased and the load is supplied by the output capacitor.
-
-When the MOSFET is turned off, the inductor releases energy through the diode to the output capacitor and load. Therefore, the output voltage becomes higher than the input voltage.
-
-In steady-state operation, the average voltage across the inductor over one switching period must be zero. This is known as the inductor volt-second balance:
+For \(V_{in}=20V\) and \(V_{out}=48V\):
 
 $$
-V_{L,on}DT+V_{L,off}(1-D)T=0
+D=1-\frac{20}{48}=0.5833
 $$
 
-where \(T\) is the switching period.
+Therefore, the PWM duty cycle was set to:
 
----
+$$
+D=58.3\%
+$$
 
-### 2.2 Buck–Boost Converter
+The PWM frequency remains 20 kHz, so the PWM period is:
 
-A Buck–Boost converter can produce an output voltage whose magnitude may be higher or lower than the input voltage. In the inverting Buck–Boost topology, the output voltage polarity is opposite to the input voltage polarity.
+$$
+T_s=\frac{1}{20,000}=50\mu s
+$$
 
-During start-up, the output capacitor is initially uncharged. As a result, the inductor current may rise to a value much higher than its steady-state value. This causes high transient current stress on the converter components such as the MOSFET, diode, and inductor.
-
-The start-up transient response is therefore important in converter design.
-
----
-
-## 3. Boost Converter Simulation
-
-### 3.1 Simulation Parameters
-
-The Boost converter was simulated with the following parameters:
+The Pulse Generator settings were:
 
 | Parameter | Value |
 |---|---:|
-| Input voltage, Case 1 | 24 V |
-| Input voltage, Case 2 | 20 V |
-| PWM frequency | 20 kHz |
-| PWM period | 50 μs |
-| Duty cycle, Case 1 | 50% |
-| Duty cycle, Case 2 | 58.3% |
-| Inductor | 1 mH |
-| Capacitor | 470 μF |
-| Load resistor | 48 Ω |
-| powergui mode | Continuous |
+| Amplitude | 1 |
+| Period | 50e-6 s |
+| Pulse Width | 58.3% |
+| Phase Delay | 0 |
+| Sample Time | 0 |
 
-The PWM frequency is:
+![Figure 2. Boost converter inductor current with 20 V input and 58.3% duty cycle.](figures/fig02_boost_20V_inductor_current.png)
+
+**Figure 2. Boost converter inductor current with 20 V input and 58.3% duty cycle.**
+
+![Figure 3. Boost converter output voltage with 20 V input and 58.3% duty cycle.](figures/fig03_boost_20V_output_voltage.png)
+
+**Figure 3. Boost converter output voltage with 20 V input and 58.3% duty cycle.**
+
+The output voltage shows a start-up overshoot and then settles close to 48 V. The steady-state value agrees with the theoretical requirement that the load voltage should remain close to the original 48 V value.
+
+The steady-state inductor voltage should switch between:
 
 $$
-f_s=20kHz
+V_{L,on}=V_{in}=20V
 $$
 
-Therefore, the PWM period is:
+and
 
 $$
-T=\frac{1}{f_s}=\frac{1}{20000}=50\mu s
+V_{L,off}=V_{in}-V_{out}=20-48=-28V
 $$
+
+The volt-second balance is:
+
+$$
+20\times0.583+(-28)\times(1-0.583)\approx0
+$$
+
+![Figure 4. Steady-state inductor voltage zoom with 20 V input.](figures/fig06_boost_20V_inductor_voltage_zoom.png)
+
+**Figure 4. Steady-state inductor voltage zoom with 20 V input.**
+
+The waveform verifies that the inductor voltage switches approximately between +20 V and -28 V in steady state.
 
 ---
 
-### 3.2 Boost Converter Simulink Model
+### 2.4 Case B: 24 V Input, 20 kHz PWM, 50% Duty Cycle
 
-The Boost converter was constructed using a DC voltage source, inductor, MOSFET, diode, output capacitor, load resistor, voltage measurement blocks, current measurement block, PWM generator, scopes, and powergui.
-
-The basic structure of the Boost converter is:
-
-$$
-V_{in} \rightarrow L \rightarrow \text{switching node} \rightarrow D \rightarrow V_{out}
-$$
-
-The MOSFET is connected between the switching node and ground. The output capacitor and load resistor are connected in parallel at the output.
-
-![Figure 1. Simulink model of the Boost converter.](./figures/figure1_boost_model.png)
-
----
-
-## 4. Boost Converter Case 1: \(V_{in}=24V\), \(D=50\%\)
-
-### 4.1 Theoretical Calculation
-
-For the first Boost converter case:
+For the original Boost converter case:
 
 $$
 V_{in}=24V
 $$
 
 $$
-D=50\%=0.5
-$$
-
-Using the Boost converter equation:
-
-$$
-V_{out}=\frac{V_{in}}{1-D}
-$$
-
-$$
-V_{out}=\frac{24}{1-0.5}
-$$
-
-$$
-V_{out}=48V
-$$
-
-Therefore, the theoretical output voltage is:
-
-$$
-V_{out}=48V
-$$
-
----
-
-### 4.2 Output Voltage Waveform
-
-![Figure 2. Output voltage waveform of the Boost converter when \(V_{in}=24V\) and \(D=50\%\).](./figures/figure2_boost_24V_output_voltage.png)
-
-The simulation result shows that the output voltage rises from 0 V during start-up. A large overshoot occurs at the beginning, with the voltage reaching approximately 90 V. After the transient period, the output voltage decreases and finally settles close to 48 V.
-
-The start-up overshoot occurs because the Boost converter is operated in open-loop mode. There is no feedback controller or soft-start circuit to limit the output voltage during the start-up period.
-
-In steady state, the output voltage is close to the theoretical value of 48 V. Therefore, the simulation result agrees with the theoretical Boost converter voltage conversion ratio.
-
----
-
-### 4.3 Inductor Current Waveform
-
-![Figure 3. Inductor current waveform of the Boost converter when \(V_{in}=24V\) and \(D=50\%\).](./figures/figure3_boost_24V_inductor_current.png)
-
-The inductor current increases rapidly during start-up and reaches a large transient peak. After the transient period, the current becomes a periodic ripple waveform.
-
-The high start-up current occurs because the output capacitor is initially uncharged and the inductor transfers energy to charge the capacitor. This current stress is much higher than the steady-state ripple current.
-
----
-
-### 4.4 Inductor Voltage Waveform and Volt-Second Balance
-
-![Figure 4. Steady-state inductor voltage waveform of the Boost converter when \(V_{in}=24V\) and \(D=50\%\).](./figures/figure4_boost_24V_inductor_voltage.png)
-
-In steady state, the inductor voltage switches between approximately:
-
-$$
-+24V
-$$
-
-and:
-
-$$
--24V
-$$
-
-When the MOSFET is on:
-
-$$
-V_{L,on}=V_{in}=24V
-$$
-
-When the MOSFET is off:
-
-$$
-V_{L,off}=V_{in}-V_{out}=24-48=-24V
-$$
-
-Since the duty cycle is 50%:
-
-$$
 D=0.5
 $$
 
-The volt-second balance is:
+The theoretical output voltage is:
 
 $$
-V_{L,on}D+V_{L,off}(1-D)=0
+V_{out}=\frac{24}{1-0.5}=48V
 $$
 
-$$
-24(0.5)+(-24)(0.5)=0
-$$
+The Pulse Generator settings were:
+
+| Parameter | Value |
+|---|---:|
+| Amplitude | 1 |
+| Period | 50e-6 s |
+| Pulse Width | 50% |
+| Phase Delay | 0 |
+| Sample Time | 0 |
+
+![Figure 5. Boost converter output voltage with 24 V input and 50% duty cycle.](figures/fig04_boost_24V_output_voltage.png)
+
+**Figure 5. Boost converter output voltage with 24 V input and 50% duty cycle.**
+
+![Figure 6. Boost converter inductor current with 24 V input and 50% duty cycle.](figures/fig05_boost_24V_inductor_current.png)
+
+**Figure 6. Boost converter inductor current with 24 V input and 50% duty cycle.**
+
+The output voltage has a large start-up overshoot due to open-loop operation, but it settles close to 48 V after the transient period. The inductor current also has a large start-up peak before settling to steady-state operation.
+
+In steady state, the inductor voltage should switch between:
 
 $$
-12-12=0
+V_{L,on}=24V
 $$
 
-Therefore, the volt-second balance condition is satisfied in steady state.
+and
+
+$$
+V_{L,off}=24-48=-24V
+$$
+
+Since \(D=0.5\), the volt-second balance is:
+
+$$
+24\times0.5+(-24)\times0.5=0
+$$
+
+![Figure 7. Steady-state inductor voltage zoom with 24 V input.](figures/fig07_boost_24V_inductor_voltage_zoom.png)
+
+**Figure 7. Steady-state inductor voltage zoom with 24 V input.**
+
+The waveform verifies that the inductor voltage switches approximately between +24 V and -24 V, confirming the volt-second balance condition.
 
 ---
 
-## 5. Boost Converter Case 2: \(V_{in}=20V\), \(V_{out}\approx48V\)
+## 3. Buck–Boost Converter Start-up Transient Response
 
-### 5.1 Duty Cycle Calculation
+### 3.1 Handout Parameters
 
-In the second case, the input voltage is changed to:
-
-$$
-V_{in}=20V
-$$
-
-The required output voltage remains approximately:
-
-$$
-V_{out}=48V
-$$
-
-Using the Boost converter equation:
-
-$$
-V_{out}=\frac{V_{in}}{1-D}
-$$
-
-Rearranging for \(D\):
-
-$$
-1-D=\frac{V_{in}}{V_{out}}
-$$
-
-$$
-D=1-\frac{V_{in}}{V_{out}}
-$$
-
-$$
-D=1-\frac{20}{48}
-$$
-
-$$
-D=0.5833
-$$
-
-Therefore, the PWM duty cycle should be:
-
-$$
-D=58.3\%
-$$
-
-The Pulse Generator was adjusted to:
-
-$$
-\text{Pulse Width}=58.3\%
-$$
-
----
-
-### 5.2 Output Voltage Waveform
-
-![Figure 5. Output voltage waveform of the Boost converter when \(V_{in}=20V\) and \(D=58.3\%\).](./figures/figure5_boost_20V_output_voltage.png)
-
-The simulation result shows that the output voltage still settles close to 48 V after the start-up transient. This confirms that the duty cycle adjustment compensates for the lower input voltage.
-
-There is still a start-up overshoot because the converter is operated in open-loop mode. However, the steady-state output voltage agrees with the theoretical value.
-
----
-
-### 5.3 Inductor Current Waveform
-
-![Figure 6. Inductor current waveform of the Boost converter when \(V_{in}=20V\) and \(D=58.3\%\).](./figures/figure6_boost_20V_inductor_current.png)
-
-The inductor current also shows a large transient peak during start-up. After the start-up period, the current becomes a periodic ripple waveform.
-
-Compared with the 24 V case, a higher duty cycle is required to maintain the same output voltage because the input voltage is lower.
-
----
-
-### 5.4 Inductor Voltage Waveform and Volt-Second Balance
-
-![Figure 7. Steady-state inductor voltage waveform of the Boost converter when \(V_{in}=20V\) and \(D=58.3\%\).](./figures/figure7_boost_20V_inductor_voltage.png)
-
-In steady state, the inductor voltage switches between approximately:
-
-$$
-+20V
-$$
-
-and:
-
-$$
--28V
-$$
-
-When the MOSFET is on:
-
-$$
-V_{L,on}=V_{in}=20V
-$$
-
-When the MOSFET is off:
-
-$$
-V_{L,off}=V_{in}-V_{out}=20-48=-28V
-$$
-
-Using the duty cycle:
-
-$$
-D=0.583
-$$
-
-$$
-1-D=0.417
-$$
-
-The volt-second balance is:
-
-$$
-20(0.583)+(-28)(0.417)\approx0
-$$
-
-$$
-11.66-11.68\approx0
-$$
-
-Therefore, the inductor volt-second balance is also satisfied for the 20 V input case.
-
----
-
-## 6. Buck–Boost Converter Start-Up Transient Simulation
-
-### 6.1 Simulation Parameters
-
-The Buck–Boost converter was simulated using the following parameters:
+The Buck–Boost converter was simulated using the parameters from the handout:
 
 | Parameter | Value |
 |---|---:|
 | Input voltage \(V_g\) | 10 V |
-| Load resistor \(R\) | 20 Ω |
+| Load resistance \(R\) | 20 Ω |
 | Capacitor \(C_1\) | 50 μF |
 | Inductor \(L_1\) | 15 μH |
 | Inductor winding resistance \(R_L\) | 0.1 Ω |
-| MOSFET on-resistance \(R_{on}\) | 50 mΩ |
-| Diode on-resistance | 5 mΩ |
-| Diode forward voltage drop | 0.7 V |
+| MOSFET on-resistance | 50 mΩ = 0.05 Ω |
+| Diode on-resistance | 5 mΩ = 0.005 Ω |
+| Diode voltage drop | 0.7 V |
 | PWM amplitude | 10 V |
-| PWM period | 10 μs |
-| PWM frequency | 100 kHz |
-| powergui mode | Continuous |
+| PWM period \(T_s\) | 10 μs |
+| PWM frequency \(f_s\) | 100 kHz |
 
-The PWM frequency is:
+The Simulink model is shown below.
 
-$$
-f_s=\frac{1}{T}
-$$
+![Figure 8. Simulink model of the Buck–Boost converter.](figures/fig08_buck_boost_converter_simulink_model.png)
 
-$$
-f_s=\frac{1}{10\mu s}
-$$
-
-$$
-f_s=100kHz
-$$
+**Figure 8. Simulink model of the Buck–Boost converter.**
 
 ---
 
-### 6.2 Buck–Boost Converter Simulink Model
+## 4. Selecting a Suitable Duty Cycle to Avoid DCM and Ensure CCM
 
-The Buck–Boost converter was constructed according to the circuit diagram. The MOSFET is controlled by a pulsed voltage signal. The inductor winding resistance is included in series with the inductor to represent copper loss.
+### 4.1 Why the 50% Duty Cycle Is Not Suitable for CCM
 
-![Figure 8. Simulink model of the Buck–Boost converter.](./figures/figure8_buckboost_model.png)
+The handout specifies the PWM amplitude and period, but it does not explicitly specify a duty cycle for the Buck–Boost transient simulation. To avoid discontinuous conduction mode (DCM), the duty cycle must be selected carefully.
+
+For an inverting Buck–Boost converter, the critical inductance for CCM is:
+
+$$
+L_{crit}=\frac{R T_s(1-D)^2}{2}
+$$
+
+Using the handout values:
+
+$$
+R=20\Omega
+$$
+
+$$
+T_s=10\mu s
+$$
+
+$$
+L=15\mu H
+$$
+
+If \(D=50\%\):
+
+$$
+L_{crit}=\frac{20\times10\times10^{-6}\times(1-0.5)^2}{2}
+$$
+
+$$
+L_{crit}=25\mu H
+$$
+
+Since:
+
+$$
+15\mu H < 25\mu H
+$$
+
+50% duty cycle would cause the converter to operate in DCM or near the boundary. Therefore, 50% is not an appropriate choice if the goal is to guarantee CCM.
 
 ---
 
-### 6.3 Capacitor Voltage During Start-Up
+### 4.2 Condition for CCM with the Given Inductor
 
-![Figure 9. Capacitor voltage during start-up transient of the Buck–Boost converter.](./figures/figure9_buckboost_capacitor_voltage.png)
-
-The capacitor voltage starts from 0 V and decreases to a negative value. This occurs because the Buck–Boost converter is an inverting topology.
-
-The capacitor voltage reaches approximately:
+To ensure CCM:
 
 $$
--27V
+L > L_{crit}
 $$
 
-during the transient period and then gradually settles close to:
+Substituting the expression for \(L_{crit}\):
 
 $$
--25V
+L > \frac{R T_s(1-D)^2}{2}
 $$
 
-The negative sign is due to the polarity of the output voltage. If the voltage measurement polarity were reversed, the same physical voltage would be shown as a positive value.
+Rearranging:
+
+$$
+(1-D)^2 < \frac{2L}{R T_s}
+$$
+
+Substitute the given values:
+
+$$
+(1-D)^2 < \frac{2\times15\times10^{-6}}{20\times10\times10^{-6}}
+$$
+
+$$
+(1-D)^2 < 0.15
+$$
+
+$$
+1-D < \sqrt{0.15}=0.3873
+$$
+
+Therefore:
+
+$$
+D > 1-0.3873
+$$
+
+$$
+D > 0.6127
+$$
+
+So the duty cycle must be greater than approximately:
+
+$$
+61.3\%
+$$
+
+to ensure CCM with the given 15 μH inductor.
 
 ---
 
-### 6.4 Inductor Current During Start-Up
+### 4.3 Selected Duty Cycle
 
-![Figure 10. Inductor current during start-up transient of the Buck–Boost converter.](./figures/figure10_buckboost_inductor_current.png)
-
-The inductor current waveform shows a large transient peak during start-up. The current rises to approximately:
+A duty cycle of 70% was selected because it is above the minimum value required for CCM and still keeps the output voltage within a reasonable range.
 
 $$
-28A
+D=70\%=0.7
 $$
 
-before decreasing to its steady-state ripple waveform.
+The critical inductance at this duty cycle is:
 
-After the transient period, the inductor current becomes a periodic triangular waveform. Its steady-state value is much lower than the start-up peak.
+$$
+L_{crit}=\frac{20\times10\times10^{-6}\times(1-0.7)^2}{2}
+$$
 
-This confirms that converter components are exposed to significantly higher current stress during start-up than during steady-state operation.
+$$
+L_{crit}=9\mu H
+$$
+
+Since:
+
+$$
+15\mu H > 9\mu H
+$$
+
+the converter operates in CCM.
+
+The ideal Buck–Boost output voltage is:
+
+$$
+V_o=-\frac{D}{1-D}V_g
+$$
+
+$$
+V_o=-\frac{0.7}{0.3}\times10
+$$
+
+$$
+V_o=-23.3V
+$$
+
+Considering the diode voltage drop and conduction losses, the simulated output capacitor voltage is expected to be slightly smaller in magnitude, around -21 V to -22 V.
+
+The theoretical inductor current ripple is:
+
+$$
+\Delta i_L=\frac{V_gDT_s}{L}
+$$
+
+$$
+\Delta i_L=\frac{10\times0.7\times10\times10^{-6}}{15\times10^{-6}}
+$$
+
+$$
+\Delta i_L\approx4.67A
+$$
+
+An approximate average inductor current is:
+
+$$
+I_{L,avg}\approx\frac{D V_g}{R(1-D)^2}
+$$
+
+$$
+I_{L,avg}\approx\frac{0.7\times10}{20\times0.3^2}
+$$
+
+$$
+I_{L,avg}\approx3.89A
+$$
+
+Therefore:
+
+$$
+I_{L,min}\approx3.89-\frac{4.67}{2}=1.56A
+$$
+
+$$
+I_{L,max}\approx3.89+\frac{4.67}{2}=6.22A
+$$
+
+This confirms that the inductor current should remain above zero during steady-state operation.
 
 ---
 
-### 6.5 PWM Control Signal
+## 5. Buck–Boost Simulation Results at 70% Duty Cycle
 
-![Figure 11. PWM signal for the Buck–Boost converter.](./figures/figure11_buckboost_pwm.png)
+### 5.1 Capacitor Voltage
 
-The PWM signal switches between 0 V and 10 V. The period is:
+![Figure 9. Buck–Boost capacitor voltage at 70% duty cycle.](figures/fig09_buck_boost_capacitor_voltage_70pct.png)
 
-$$
-10\mu s
-$$
+**Figure 9. Buck–Boost capacitor voltage at 70% duty cycle.**
 
-which corresponds to a frequency of:
-
-$$
-100kHz
-$$
-
-This agrees with the required PWM signal settings.
+The capacitor voltage starts from 0 V, has a start-up overshoot, and then settles near -21 V. This agrees with the expected negative output voltage of the inverting Buck–Boost converter. The simulated voltage magnitude is lower than the ideal value because the diode voltage drop, MOSFET on-resistance, diode resistance, and inductor winding resistance are included.
 
 ---
 
-## 7. Methods to Reduce Start-Up Transient Stress
+### 5.2 Inductor Current During Start-up
 
-The simulation shows that the inductor current has a large peak during start-up. This high current can stress the MOSFET, diode, inductor, and capacitor.
+![Figure 10. Buck–Boost inductor current during start-up transient at 70% duty cycle.](figures/fig10_buck_boost_inductor_current_transient_70pct.png)
 
-Several methods can be used to reduce start-up transient stress:
+**Figure 10. Buck–Boost inductor current during start-up transient at 70% duty cycle.**
 
-### 7.1 Soft-Start Control
-
-The most effective method is to use soft-start control. Instead of applying the final duty cycle immediately, the duty cycle is gradually increased from a small value to the target value.
-
-For example:
-
-$$
-D=0\% \rightarrow 10\% \rightarrow 20\% \rightarrow \cdots \rightarrow D_{target}
-$$
-
-This reduces the rate of energy transfer and limits the peak inductor current.
-
-### 7.2 Current Limiting
-
-A current limit can be added to the control system. If the inductor current exceeds a preset limit, the controller reduces the duty cycle or temporarily turns off the MOSFET.
-
-### 7.3 Output Capacitor Pre-Charging
-
-Pre-charging the output capacitor before normal converter operation reduces the initial charging current. This can reduce the start-up current peak.
-
-### 7.4 Increasing Inductance
-
-The inductor current slope is given by:
-
-$$
-\frac{di_L}{dt}=\frac{V_L}{L}
-$$
-
-Increasing the inductance reduces the current rising rate, which helps reduce peak current during start-up.
-
-### 7.5 Adding Damping or Inrush Current Limiting
-
-A damping network or inrush current limiting resistor can also reduce start-up stress. However, this may reduce efficiency if the limiting component remains in the circuit during normal operation.
+The inductor current has a high transient peak during start-up. This shows that the converter components experience higher current stress during the start-up transient than in steady-state operation.
 
 ---
 
-## 8. Minimum PWM Switching Frequency for CCM Operation
+### 5.3 Steady-state Inductor Current and CCM Verification
 
-The final question asks for the minimum PWM switching frequency that ensures continuous conduction mode operation.
+![Figure 11. Steady-state inductor current at 70% duty cycle.](figures/fig11_buck_boost_inductor_current_ccm_zoom_70pct.png)
 
-Given:
+**Figure 11. Steady-state inductor current at 70% duty cycle.**
 
-$$
-L=100\mu H
-$$
+The steady-state inductor current remains above 0 A during the entire switching cycle. Therefore, the converter operates in continuous conduction mode.
 
-$$
-V_{out}=144V
-$$
+From the waveform:
 
 $$
-V_{in}=120V \text{ to } 162V
+i_{L,min}\approx1.4A
 $$
 
 $$
-I_{out}=5A \text{ to } 10A
+i_{L,max}\approx5.8A
 $$
+
+The ripple is approximately:
+
+$$
+\Delta i_L\approx5.8-1.4=4.4A
+$$
+
+This agrees well with the theoretical estimate of approximately 4.67 A.
+
+---
+
+## 6. Reducing Start-up Transient Stress
+
+The simulation shows that converter components are exposed to significantly higher current stress during start-up than during steady-state operation. Several design methods can reduce this stress:
+
+1. **Soft-start control**: Increase the duty cycle gradually from a small value to the final operating value instead of applying the full duty cycle immediately.
+2. **Current limiting**: Reduce or interrupt the gate signal when the inductor current exceeds a safe threshold.
+3. **Output capacitor pre-charging**: Pre-charge the output capacitor so that the converter does not initially see a fully discharged capacitor.
+4. **Increase inductance**: A larger inductor reduces the current slope because \(di_L/dt=V_L/L\).
+5. **Add damping or inrush limiting**: Damping networks or temporary series resistance can reduce transient oscillation and inrush current.
+
+Among these methods, soft-start control is usually the most practical and effective method.
+
+---
+
+## 7. Minimum PWM Switching Frequency for CCM Operation
+
+The final question asks for the minimum PWM switching frequency that ensures CCM operation for a Buck/Boost converter with:
+
+| Parameter | Value |
+|---|---:|
+| Inductance | 100 μH |
+| Output voltage | 144 VDC |
+| Input voltage range | 120 VDC to 162 VDC |
+| Output current range | 5 A to 10 A |
 
 For an ideal Buck–Boost converter:
 
 $$
-\frac{V_{out}}{V_{in}}=\frac{D}{1-D}
+\frac{V_o}{V_{in}}=\frac{D}{1-D}
 $$
 
-Solving for duty cycle:
+Therefore:
 
 $$
-D=\frac{V_{out}}{V_{out}+V_{in}}
+D=\frac{V_o}{V_o+V_{in}}
 $$
 
-The worst case for CCM occurs at minimum output current and maximum input voltage. Therefore:
-
-$$
-V_{in}=162V
-$$
-
-$$
-I_{out}=5A
-$$
-
-The duty cycle is:
-
-$$
-D=\frac{144}{144+162}
-$$
-
-$$
-D=\frac{144}{306}
-$$
-
-$$
-D=0.471
-$$
-
-The boundary condition for continuous conduction mode is:
-
-$$
-I_{L,avg}>\frac{\Delta I_L}{2}
-$$
-
-For the Buck–Boost converter:
+The inductor current ripple is:
 
 $$
 \Delta I_L=\frac{V_{in}D}{Lf_s}
 $$
 
-and:
+The CCM boundary occurs when:
 
 $$
-I_{L,avg}=\frac{I_{out}}{1-D}
+I_{L,avg}=\frac{\Delta I_L}{2}
 $$
 
-At the CCM boundary:
+For a Buck–Boost converter:
 
 $$
-\frac{I_{out}}{1-D}=\frac{1}{2}\frac{V_{in}D}{Lf_s}
+I_{L,avg}=\frac{I_o}{1-D}
+$$
+
+Thus:
+
+$$
+\frac{I_o}{1-D}=\frac{V_{in}D}{2Lf_s}
 $$
 
 Solving for \(f_s\):
 
 $$
-f_s=\frac{V_{in}D(1-D)}{2LI_{out}}
+f_s=\frac{V_{in}D(1-D)}{2LI_o}
 $$
 
-Substituting values:
+To guarantee CCM, the worst-case condition is the lowest output current and the highest required boundary frequency. The lowest output current is:
 
 $$
-f_s=\frac{162\times0.471\times(1-0.471)}{2\times100\times10^{-6}\times5}
+I_o=5A
 $$
 
+At \(V_{in}=162V\):
+
 $$
-f_s=\frac{162\times0.471\times0.529}{0.001}
+D=\frac{144}{144+162}=0.4706
+$$
+
+Substitute:
+
+$$
+f_s=\frac{162\times0.4706\times(1-0.4706)}{2\times100\times10^{-6}\times5}
 $$
 
 $$
 f_s\approx40360Hz
 $$
 
-Therefore, the minimum switching frequency is approximately:
+Therefore, the minimum PWM switching frequency is:
 
 $$
 f_{s,min}\approx40.4kHz
 $$
 
-In practical design, a switching frequency higher than this value should be selected. Therefore, a suitable choice is:
+A practical switching frequency should include margin, so a suitable choice is:
 
 $$
 f_s=50kHz
@@ -604,64 +554,18 @@ $$
 
 ---
 
-## 9. Discussion
+## 8. Conclusion
 
-The Boost converter simulation verified the theoretical relationship between input voltage, duty cycle, and output voltage.
+The Boost converter simulation verified the theoretical voltage conversion relationship. With a 24 V input and 50% duty cycle, the output voltage settled close to 48 V. When the input voltage was reduced to 20 V, the duty cycle was increased to 58.3%, and the output voltage was again maintained close to 48 V. The inductor voltage waveforms verified the steady-state volt-second balance.
 
-For the first case, with:
+For the Buck–Boost converter, the original handout parameters were retained. Since the handout did not explicitly specify the duty cycle, the duty cycle was selected by calculating the CCM condition. The analysis showed that the duty cycle must be greater than 61.3% to avoid DCM with the given 15 μH inductor. Therefore, a 70% duty cycle was selected. The simulation confirmed that the steady-state inductor current remains above zero, verifying CCM operation.
 
-$$
-V_{in}=24V
-$$
+The Buck–Boost transient simulation also showed that the inductor current has a much higher peak during start-up than during steady-state operation. This confirms that converter components are exposed to higher current stress during start-up. Soft-start control, current limiting, capacitor pre-charging, increased inductance, and damping can be used to reduce these stresses.
 
-$$
-D=50\%
-$$
-
-the theoretical output voltage was:
-
-$$
-48V
-$$
-
-The simulation output voltage settled close to 48 V after the transient period.
-
-For the second case, the input voltage was reduced to 20 V. To keep the output voltage close to 48 V, the duty cycle was increased to 58.3%. The simulation result confirmed that the output voltage could still be maintained close to 48 V.
-
-The inductor voltage waveforms also verified volt-second balance. For the 24 V input case, the inductor voltage switched between +24 V and -24 V. For the 20 V input case, the inductor voltage switched between approximately +20 V and -28 V. In both cases, the positive and negative volt-second areas were approximately equal.
-
-The Buck–Boost converter simulation showed that a large inductor current peak occurs during start-up. The capacitor voltage also experienced a transient before reaching steady state. This confirms that converter components may experience much larger stresses during start-up than during normal operation.
-
-Soft-start control and current limiting are effective ways to reduce these start-up stresses.
+Finally, the minimum PWM switching frequency required to ensure CCM for the specified 100 μH Buck/Boost design was calculated to be approximately 40.4 kHz. A practical design value of 50 kHz is recommended.
 
 ---
 
-## 10. Conclusion
-
-In this experiment, a Boost converter and a Buck–Boost converter were successfully simulated using MATLAB/Simulink.
-
-For the Boost converter, the theoretical voltage conversion relationship:
-
-$$
-V_{out}=\frac{V_{in}}{1-D}
-$$
-
-was verified. With a 24 V input and 50% duty cycle, the output voltage settled close to 48 V. When the input voltage was reduced to 20 V, the duty cycle was adjusted to 58.3%, and the output voltage again settled close to 48 V.
-
-The inductor voltage waveforms verified the volt-second balance condition in steady-state operation.
-
-For the Buck–Boost converter, the start-up transient response was observed. The capacitor voltage became negative because of the inverting output characteristic. The inductor current showed a large transient peak of approximately 28 A before reaching steady state. This demonstrated that converter components are exposed to high current stress during start-up.
-
-Finally, the minimum PWM switching frequency required to ensure continuous conduction mode operation was calculated to be approximately:
-
-$$
-40.4kHz
-$$
-
-A practical switching frequency of 50 kHz is recommended to provide a safety margin.
-
----
-
-## 11. References
+## 9. References
 
 1. Exercise 2 Lab Handout, Boost Converter and Buck–Boost Converter Simulation.
