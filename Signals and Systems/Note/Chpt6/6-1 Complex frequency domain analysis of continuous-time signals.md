@@ -42,6 +42,55 @@ $$ \mathscr{F}\{x(t)e^{-\sigma t}\} = \int_{-\infty}^{\infty} x(t)e^{-\sigma t}e
 存在条件（充要条件）：积分 $\int_{0^-}^{\infty} |x(t)e^{-\sigma t}|dt = C < \infty$ 必须收敛。
 使得该公式成立的 $\sigma$ 的取值范围称为**收敛域 (Region Of Convergence, ROC)**，通常表示为 $Re(s) > \sigma_0$（在复平面上表现为一条垂直线 $\sigma=\sigma_0$ 右侧的右半平面）。
 
+#### 收敛域到底怎么求
+
+设
+$$ s=\sigma+j\omega $$
+则
+$$ e^{-st}=e^{-\sigma t}e^{-j\omega t} $$
+
+其中 $e^{-j\omega t}$ 只表示振荡，不影响绝对收敛；真正决定积分能否收敛的是实指数因子 $e^{-\sigma t}$。  
+所以求单边拉普拉斯变换的收敛域，本质上就是找出所有使
+$$ \int_{0^-}^{\infty} |x(t)e^{-\sigma t}|dt $$
+收敛的 $\sigma$ 取值范围。
+
+#### 实用判断步骤
+
+1. 先写出定义式
+   $$ X(s)=\int_{0^-}^{\infty}x(t)e^{-st}dt $$
+2. 把 $s$ 写成 $s=\sigma+j\omega$；
+3. 只盯住 $e^{-\sigma t}$ 对信号的“压制能力”；
+4. 看 $t\to+\infty$ 时，$x(t)e^{-\sigma t}$ 是否绝对可积；
+5. 最后把结果写成 $Re(s)>\sigma_0$、$Re(s)<\sigma_0$ 或“全 $s$ 平面”。
+
+#### 三类最常见结论
+
+1. **右边指数信号**
+   若
+   $$ x(t)=e^{at}u(t) $$
+   则
+   $$ X(s)=\int_0^\infty e^{-(s-a)t}dt $$
+   要求指数衰减，因此
+   $$ Re(s-a)>0 \Longrightarrow \boxed{Re(s)>a} $$
+
+2. **多项式乘指数**
+   若
+   $$ x(t)=t^n e^{at}u(t) $$
+   虽然多了 $t^n$，但主导收敛性的仍然是指数项，因此 ROC 仍为
+   $$ \boxed{Re(s)>a} $$
+
+3. **有限时长信号**
+   若信号只在有限区间内非零，例如
+   $$ x(t)=u(t)-u(t-\tau) $$
+   积分只在有限区间内进行，因此对任意 $s$ 都收敛，ROC 为**全 $s$ 平面**。
+
+#### 一个很好记的判断原则
+
+单边拉普拉斯变换只看 $t\ge 0$ 的部分，所以它最常遇到的是右边信号。  
+因此很多题目的收敛域最后都会写成：
+$$ \boxed{Re(s)>\sigma_0} $$
+也就是“某条竖线右边的半平面”。
+
 > **【例题】求信号 $x(t) = u(t) - u(t-\tau)$ 的单边拉普拉斯变换及收敛域。**
 > **【解析】**：
 > $$ X(s) = \int_{0^-}^{\infty} [u(t)-u(t-\tau)]e^{-st}dt = \int_{0^-}^{\tau} e^{-st}dt = \left. -\frac{1}{s}e^{-st} \right|_{0^-}^{\tau} = \frac{1}{s}(1 - e^{-s\tau}) $$
