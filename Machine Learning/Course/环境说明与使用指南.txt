@@ -1,0 +1,425 @@
+================================================================
+        Hands-On ML3 学习环境说明与使用指南
+        生成日期：2026-09-10
+================================================================
+
+
+【一】目录结构
+----------------------------------------------------------------
+
+D:\Hands-On-ML3-Course\
+    ├─ .venv\                    Python 虚拟环境（装在 .venv 里，别删）
+    ├─ handson-ml3\              官方仓库，19 个章节 notebook 都在这
+    ├─ 环境说明与使用指南.txt    本文件
+    │
+    └─ handson-ml3\ 内部：
+         tools_numpy.ipynb            NumPy 教程
+         tools_matplotlib.ipynb       Matplotlib 教程
+         tools_pandas.ipynb           Pandas 教程
+         math_linear_algebra.ipynb    线性代数
+         math_differential_calculus.ipynb  微积分
+         01_...〜09_...ipynb          机器学习正文（你的学习范围）
+         10_...〜19_...ipynb          深度学习 / 强化学习（本课程不需要）
+
+
+【二】环境概况
+----------------------------------------------------------------
+
+Python 版本    3.13.2
+虚拟环境位置   D:\Hands-On-ML3-Course\.venv
+Jupyter 内核名 handson-ml3   （界面显示为 "Python (Hands-On ML3)"）
+
+已安装的核心库：
+    numpy         2.2.3        数值计算
+    pandas        2.2.3        数据处理
+    matplotlib    3.10.1       绘图
+    scipy         1.15.2       科学计算
+    scikit-learn  1.9.0        机器学习核心库
+    joblib        1.6.0        并行 / 缓存
+    graphviz      0.21         决策树可视化（第 6 章）
+    nltk          3.10.3       第 3 章练习 4
+    urlextract    1.9.0        第 3 章练习 4
+    ipywidgets    8.1.9        交互控件
+    numexpr       2.14.2       pandas 加速
+    jupyterlab    4.6.3        Notebook 界面
+
+系统级软件：
+    Graphviz 16.1.0            装在 C:\Program Files\Graphviz\bin
+                               已加入用户级 PATH
+
+
+【三】本次做了哪些修复（重要）
+----------------------------------------------------------------
+
+你原有的环境里，核心 ML 库其实都装好了，但缺了 4 样，
+其中第 1 条是致命问题：
+
+1) ★ Jupyter 内核从未注册
+   现象：jupyter kernelspec list 显示 "No kernels available"。
+        JupyterLab 能打开 notebook，但一运行代码就报错，
+        或者一直卡在 "Kernel Connecting"。
+   处理：已注册内核 handson-ml3，指向本项目的 .venv。
+
+2) ★ Graphviz 的 dot.exe 缺失
+   现象：第 6 章画决策树时抛 ExecutableNotFound。
+   说明：光装 Python 的 graphviz 包不够 —— 那个包只是个壳，
+        真正画图要调 dot.exe 这个外部程序，两者缺一不可。
+   处理：用 winget 装了 Graphviz 16.1.0，并且手动把
+        C:\Program Files\Graphviz\bin 加进了用户级 PATH
+        （winget 静默安装没有自动配 PATH）。
+   注意：PATH 的改动对【已经打开的终端和 VS Code 不生效】，
+        必须新开窗口 / 重启软件。
+
+3) 缺 graphviz (Python 包)、nltk、urlextract、ipywidgets、numexpr
+   处理：已用 pip 装好。
+
+4) ★ VS Code 缺 Jupyter 扩展
+   现象：VS Code 打开 .ipynb 只能当 JSON 文本看，跑不了。
+   处理：已装 ms-toolsai.jupyter（连带 4 个配套扩展）。
+
+
+【四】千万不要做的事
+----------------------------------------------------------------
+
+✗ 不要运行 pip install -r handson-ml3\requirements.txt
+
+  两个原因：
+
+  1. 它要装 tensorflow~=2.14.0，而 TensorFlow 2.14 没有
+     Python 3.13 的安装包，这一步【必然失败】，还会连带
+     把已经装好的东西搞乱。
+
+  2. 它会把 numpy / scikit-learn / pandas / matplotlib 降级到
+     1.26 / 1.3.2 / 2.1.3 / 3.8。而降级是【不需要】的：
+     你这份 notebook 是已更新的版本，用的都是新式 API，例如
+         OneHotEncoder(sparse_output=False)
+         HistGradientBoostingRegressor(categorical_features=[0])
+         fetch_openml(..., parser="auto")
+     实测在当前的 numpy 2.2.3 / sklearn 1.9.0 下完全正常。
+
+✗ 不要装这些（都属于第 10〜19 章，你的课程用不到）：
+     tensorflow 及其全家桶、keras-tuner、transformers、
+     gymnasium、statsmodels、pydot、google-cloud-*
+
+✗ 不要装 xgboost
+     虽然 requirements.txt 把它标为"第 7 章可选"，但第 1〜9 章
+     的 notebook 里【没有任何可执行的 xgboost 代码】（书里只是
+     正文提到）。装它纯属浪费 100 多 MB。
+
+
+【五】如何启动 JupyterLab
+----------------------------------------------------------------
+
+方式 A：直接调用 exe（推荐，不用激活环境）
+   打开【新的】PowerShell 或 CMD，粘贴两行：
+
+       cd D:\Hands-On-ML3-Course\handson-ml3
+       D:\Hands-On-ML3-Course\.venv\Scripts\jupyter-lab.exe
+
+   cd 进 handson-ml3 很重要 —— JupyterLab 默认把当前目录当作
+   工作目录，这样左边文件树才能直接看到所有 notebook。
+
+方式 B：先激活环境再启动
+   PowerShell：
+       D:\Hands-On-ML3-Course\.venv\Scripts\Activate.ps1
+       cd D:\Hands-On-ML3-Course\handson-ml3
+       jupyter lab
+   若提示"禁止运行脚本"，先执行一次（只对当前窗口生效）：
+       Set-ExecutionPolicy -Scope Process Bypass
+
+   CMD：
+       D:\Hands-On-ML3-Course\.venv\Scripts\activate.bat
+       cd D:\Hands-On-ML3-Course\handson-ml3
+       jupyter lab
+
+   Git Bash：
+       source D:/Hands-On-ML3-Course/.venv/Scripts/activate
+       cd D:/Hands-On-ML3-Course/handson-ml3
+       jupyter lab
+
+★ 启动后必做的一步
+   浏览器会自动打开（地址 http://localhost:8888）。
+   没自动开就复制终端里那行带 token= 的完整网址手动打开，
+   token 不能丢，否则进不去。
+
+   然后打开 notebook，【点右上角内核，选 "Python (Hands-On ML3)"】。
+   默认的 python3 内核在你机器上不存在，选错会报错。
+
+★ 关闭
+   回到终端按 Ctrl+C，问 "Shutdown this Jupyter server? (y/N)"
+   时输入 y。
+
+★ 可选：做个双击启动的快捷方式
+   在 D:\Hands-On-ML3-Course 下新建一个文本文件，改名为
+   启动Jupyter.bat（注意后缀是 .bat 不是 .txt），内容写：
+
+       @echo off
+       cd /d D:\Hands-On-ML3-Course\handson-ml3
+       "D:\Hands-On-ML3-Course\.venv\Scripts\jupyter-lab.exe"
+
+   以后双击它就能开。
+
+
+【六】VS Code 使用详解
+================================================================
+
+---- 6.1 为什么用 VS Code 写 notebook ----
+
+JupyterLab 在浏览器里，胜在"开箱即用、和书里截图长得一样"。
+VS Code 胜在：
+
+  1. 变量查看器 —— 跑完一段代码，能直接在侧边栏看到每个变量的
+     形状、类型、前几行值。学 ML 时数据形状对不上是最常见的
+     错误，有这个一眼就能看出问题。
+  2. 代码补全和提示 —— sklearn 的 API 又长又多，Pylance 能提示
+     参数名，少查文档。
+  3. 调试器 —— 可以打断点、单步执行。学算法实现（第 4 章的
+     梯度下降）时特别有用。
+  4. 一个窗口同时开 notebook 和 .py 文件，方便自己写练习。
+  5. Git 集成、中文界面（你已经装了中文语言包）。
+
+建议：两者都留着。跟着书看用 JupyterLab，自己动手改代码、
+调试的时候用 VS Code。
+
+---- 6.2 前置条件（已经帮你装好了）----
+
+VS Code 安装位置：D:\Microsoft VS Code
+
+已确认安装的扩展：
+    ms-python.python               Python 官方扩展（必需）
+    ms-python.vscode-pylance       代码补全引擎
+    ms-python.debugpy              调试器
+    ms-toolsai.jupyter   ← 本次新装   notebook 支持（必需）
+    ms-ceintl.vscode-language-pack-zh-hans   中文界面
+
+之前缺的就是 ms-toolsai.jupyter，所以 VS Code 打不开 notebook。
+
+---- 6.3 打开哪个文件夹（这一步最容易错）----
+
+★ 要打开 D:\Hands-On-ML3-Course 这个【外层文件夹】，
+  不是里面的 handson-ml3。
+
+原因：虚拟环境 .venv 在外层文件夹里。VS Code 的 Python 扩展
+只会扫描【当前打开的文件夹及其子目录】来找虚拟环境，不会往上
+找父目录。如果你只打开 handson-ml3，它找不到 .venv，就得手动
+指定解释器，多一道麻烦。
+
+操作：
+    打开 VS Code → 文件 → 打开文件夹 → 选 D:\Hands-On-ML3-Course
+
+打开后左侧文件树应该长这样：
+    HANDS-ON-ML3-COURSE
+      ├─ .venv            （灰色，可忽略）
+      └─ handson-ml3
+           ├─ 01_the_machine_learning_landscape.ipynb
+           └─ ...
+
+也可以用命令行直接打开：
+    code D:\Hands-On-ML3-Course
+
+---- 6.4 选择 Python 解释器 ----
+
+打开任意一个 .py 文件，或者按 Ctrl+Shift+P 打开命令面板，
+输入并选择：
+
+    Python: Select Interpreter
+
+在列表里选路径为下面这个的项（会标注 "Recommended"）：
+
+    D:\Hands-On-ML3-Course\.venv\Scripts\python.exe
+
+如果列表里没有它，选 "Enter interpreter path..."，
+然后手动粘贴上面这个完整路径。
+
+---- 6.5 选择 Notebook 内核 ----
+
+打开一个 .ipynb 文件后，点【右上角】的 "Select Kernel"
+（中文界面是"选择内核"），会弹出选择列表，选：
+
+    Python Environments  →  Python (Hands-On ML3)
+
+    * 这个 "Python (Hands-On ML3)" 就是之前注册的那个内核，
+      VS Code 和 JupyterLab 共用同一份注册表，所以这里能直接看到。
+
+    * 如果列表里只显示一堆 "Python 3.x.x" 的裸环境，选
+      "Python Environments" 分类下的，或者直接选路径为
+      D:\Hands-On-ML3-Course\.venv\Scripts\python.exe 的那一项。
+
+选好后，右上角会显示当前内核名字。之后每个 notebook 第一次
+打开都要选一次，选过之后 VS Code 会记住。
+
+---- 6.6 日常操作快捷键 ----
+
+    Shift+Enter     运行当前单元格，并跳到下一个
+    Ctrl+Enter      运行当前单元格，光标留在原地（调参时常用）
+    Alt+Enter       运行当前单元格，并在下面插入一个新单元格
+    Ctrl+Shift+P → "Jupyter: Run All Cells"    运行全部
+
+    Esc             从编辑模式切到命令模式
+    命令模式下 A    在上方插入单元格
+    命令模式下 B    在下方插入单元格
+    命令模式下 DD   删除当前单元格
+    命令模式下 M    切换成 Markdown 单元格
+    命令模式下 Y    切换成代码单元格
+
+---- 6.7 变量查看器（VS Code 的杀手锏）----
+
+在 notebook 里跑完一个单元格后，点左侧活动栏的
+"Variables"（变量）图标，或者命令面板输入
+"Jupyter: Focus on Variables View"。
+
+会列出当前内核里所有变量，包括：
+    - 名字、类型
+    - 数值大小
+    - DataFrame / ndarray 的形状
+
+展开变量还能看到具体内容，DataFrame 会以表格形式展示。
+
+针对本书的典型用法：第 2 章做数据预处理时，跑完
+    housing_prepared = full_pipeline.transform(housing)
+到变量查看器里看一眼 housing_prepared 的 shape，确认是
+(16512, 16) 这样的结果，比 print 方便得多。
+
+---- 6.8 调试功能 ----
+
+在 .py 文件里点击行号左边可以下断点（红点），按 F5 启动调试。
+本书第 4 章讲梯度下降、第 11 章讲反向传播时，如果想把公式
+和代码对上，打断点单步走一遍非常有效。
+
+Notebook 里也支持调试：点单元格左侧的"运行"按钮旁的下拉箭头，
+选 "Debug Cell"，会打开调试面板。
+
+---- 6.9 几个容易踩的坑 ----
+
+1) ★ PATH 问题
+   我这次才把 Graphviz 加进 PATH。如果你的 VS Code 在我改
+   PATH 【之前】就已经开着，它读的是旧环境变量，第 6 章画
+   决策树会报 ExecutableNotFound。
+   解决：完全退出 VS Code（不是关窗口，要退出进程）再重新打开。
+
+2) ★ 内核和解释器是两回事
+   "Select Interpreter" 管的是 .py 文件的补全和运行；
+   "Select Kernel" 管的是 notebook 的运行。
+   两个都要指向 .venv。只设了前者，notebook 还是跑不了。
+
+3) ★ 内核状态不同步
+   VS Code 里跑 notebook，如果某个单元格报 NameError，
+   先检查是不是跳着跑了。notebook 是有状态的，
+   必须从上往下顺序执行。
+   实在乱了就点 "Restart Kernel"（重启内核）再 "Run All"。
+
+4) 第 6 章的图不显示
+   先按上面第 1 条检查 PATH。验证方法见【八】自检代码。
+
+5) 中文界面
+   你已经装了中文语言包，但可能需要手动切：
+   Ctrl+Shift+P → "Configure Display Language" → 选 zh-cn → 重启。
+
+
+【七】学习路线（非深度学习）
+----------------------------------------------------------------
+
+按这个顺序走：
+
+    第一阶段  工具篇（先补基础，别跳）
+        tools_numpy.ipynb
+        tools_matplotlib.ipynb
+        tools_pandas.ipynb
+
+    第二阶段  数学篇（学到相关章节时再回来翻即可）
+        math_linear_algebra.ipynb
+        math_differential_calculus.ipynb
+
+    第三阶段  正文
+        01_the_machine_learning_landscape.ipynb   机器学习概览
+        02_end_to_end_machine_learning_project.ipynb  端到端项目
+        03_classification.ipynb                   分类
+        04_training_linear_models.ipynb           训练线性模型
+        05_support_vector_machines.ipynb          支持向量机
+        06_decision_trees.ipynb                   决策树
+        07_ensemble_learning_and_random_forests.ipynb  集成学习
+        08_dimensionality_reduction.ipynb         降维
+        09_unsupervised_learning.ipynb            无监督学习
+
+    第 10〜19 章是深度学习 / 强化学习 / 部署，跳过。
+
+使用习惯：
+    - notebook 有状态，必须【从上往下顺序执行】
+    - 标了 "# extra code" 的单元格是作者生成书籍插图用的，
+      直接跳过不影响理解
+    - save_fig() 会往 images\ 目录写图，无害
+    - 第 2 章第一次运行会联网下载 housing 数据（约 1MB）
+    - 第 3、7 章的 MNIST 数据集【已经下载缓存好了】，
+      存在 C:\Users\lenovo\scikit_learn_data，
+      不用再等下载（这一步通常要等好几分钟）
+
+
+【八】自检代码
+----------------------------------------------------------------
+
+新建一个 notebook（JupyterLab 或 VS Code 都行），
+把下面这段贴进去运行，确认环境正常：
+
+------------------------------------------------------------
+import sys, sklearn, numpy, pandas, matplotlib, graphviz
+print("Python  ", sys.version.split()[0])
+print("sklearn ", sklearn.__version__)
+print("numpy   ", numpy.__version__)
+print("graphviz", graphviz.__version__)
+
+import subprocess
+r = subprocess.run(["dot", "-V"], capture_output=True, text=True)
+print("dot.exe ", r.stderr.strip())
+------------------------------------------------------------
+
+预期输出：
+    Python   3.13.2
+    sklearn  1.9.0
+    numpy    2.2.3
+    graphviz 0.21
+    dot.exe  dot - graphviz version 16.1.0
+
+    * 最后一行有内容 = Graphviz 二进制也通了（同时验证 PATH 生效）
+    * 最后一行是空的或报错 = PATH 没生效，
+      新开终端 / 重启 VS Code 再试
+
+
+【九】常见问题排查
+----------------------------------------------------------------
+
+问题：打开 notebook 提示 "No kernel" / 一直卡在 Kernel Connecting
+原因：内核没选对
+解决：右上角选 "Python (Hands-On ML3)"
+
+问题：NameError: name 'xxx' is not defined
+原因：单元格跳着跑了，前面的变量没定义
+解决：从上往下顺序执行；或重启内核后 Run All
+
+问题：第 6 章 ExecutableNotFound: failed to execute 'dot'
+原因：PATH 没生效
+解决：关掉终端/VS Code 完全重开；用【八】的自检确认
+
+问题：pip install 报错、装不上
+原因：很可能在跑 requirements.txt
+解决：见【四】。你的环境已经齐了，不需要再装
+
+问题：提示找不到 jupyter 命令
+原因：没激活环境，或者终端是旧的
+解决：用【五】的方式 A，直接写全路径调用 exe
+
+问题：想重装环境
+解决方案：删除 .venv 文件夹，然后执行
+    D:\python\python.exe -m venv D:\Hands-On-ML3-Course\.venv
+    D:\Hands-On-ML3-Course\.venv\Scripts\python.exe -m pip install ^
+        numpy pandas matplotlib scipy scikit-learn ^
+        jupyterlab ipykernel graphviz joblib nltk urlextract ^
+        ipywidgets numexpr tqdm pillow
+    D:\Hands-On-ML3-Course\.venv\Scripts\python.exe -m ipykernel ^
+        install --user --name handson-ml3 --display-name "Python (Hands-On ML3)"
+（注意：.venv 是用 include-system-site-packages 建的，会和
+  D:\python 共享部分第三方包，并非完全隔离。目前不影响使用。）
+
+
+================================================================
+文档结束。有问题随时问。
+================================================================
